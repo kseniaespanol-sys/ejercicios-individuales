@@ -1,18 +1,17 @@
-<div class="ex-isolation" id="parte1-revelaciones-2026">
+<div class="ex-isolation" id="ex1-def-term-2026">
     <style>
-        #parte1-revelaciones-2026 {
+        #ex1-def-term-2026 {
             background: #ffffff;
             padding: 40px 30px;
             border-radius: 24px;
-            max-width: 980px;
+            max-width: 950px;
             margin: 20px auto;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             border: 2px solid #45188c;
             box-shadow: 0 15px 35px rgba(69, 24, 140, 0.06);
             color: #2c3e50;
         }
-
-        #parte1-revelaciones-2026 h2 {
+        #ex1-def-term-2026 h2 {
             color: #45188c;
             text-align: center;
             margin-bottom: 6px;
@@ -20,75 +19,30 @@
             font-size: 1.35rem;
             font-weight: 800;
         }
-
-        #parte1-revelaciones-2026 .p1-instruction {
+        #ex1-def-term-2026 .ex-instruction {
             text-align: center;
             color: #64748b;
             font-style: italic;
             margin-bottom: 25px;
             font-size: 0.98rem;
         }
-
-        /* Банк ключевых выражений */
-        .p1-pool {
-            background: #f4f0ff;
-            border: 2px dashed #8b5cf6;
-            border-radius: 18px;
-            padding: 16px 20px;
-            margin-bottom: 30px;
-        }
-
-        .p1-pool-title {
-            font-weight: 800;
-            color: #45188c;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .p1-pool-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            font-weight: 700;
-            color: #581c87;
-            font-size: 0.88rem;
-        }
-
-        .p1-pool-item {
-            background: #ffffff;
-            border: 1px solid #c084fc;
-            padding: 4px 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        /* Контейнер текста */
-        .p1-text-container {
+        .ex1-card {
             background: #fdfbff;
             border: 1px solid #e9d5ff;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 18px;
         }
-
-        .p1-paragraph {
-            font-size: 1.08rem;
-            line-height: 2.6;
-            margin-bottom: 20px;
-            color: #334155;
-            text-align: justify;
+        .ex1-def-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #3b0764;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
-
-        .p1-paragraph:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Выпадающие списки */
-        .p1-select {
-            padding: 5px 10px;
-            border-radius: 8px;
+        .ex1-select {
+            padding: 8px 14px;
+            border-radius: 10px;
             border: 2px solid #cbd5e1;
             font-size: 0.95rem;
             font-weight: 700;
@@ -96,392 +50,118 @@
             outline: none;
             background: #ffffff;
             cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 0 3px;
-            max-width: 280px;
-        }
-
-        .p1-select:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
-        }
-
-        .p1-select.correct {
-            border-color: #22c55e !important;
-            background-color: #dcfce7 !important;
-            color: #15803d !important;
-        }
-
-        .p1-select.wrong {
-            border-color: #f43f5e !important;
-            background-color: #ffe4e6 !important;
-            color: #be123c !important;
-        }
-
-        /* Панель управления */
-        .p1-control-bar {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 2px dashed #e2e8f0;
-        }
-
-        .p1-ctrl-btn {
-            padding: 12px 22px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .p1-btn-check {
-            background: #8b5cf6;
-            color: #ffffff;
-        }
-
-        .p1-btn-check:hover {
-            background: #7c3aed;
-            transform: translateY(-2px);
-        }
-
-        .p1-btn-show {
-            background: #f1f5f9;
-            color: #334155;
-            border: 1px solid #cbd5e1;
-        }
-
-        .p1-btn-show:hover {
-            background: #e2e8f0;
-        }
-
-        .p1-btn-reset {
-            background: #fff1f2;
-            color: #be123c;
-            border: 1px solid #fecdd3;
-        }
-
-        .p1-btn-reset:hover {
-            background: #ffe4e6;
-        }
-
-        .p1-score-box {
-            display: none;
-            text-align: center;
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #45188c;
-            margin-top: 15px;
             width: 100%;
+            max-width: 380px;
         }
-
-        @media (max-width: 650px) {
-            #parte1-revelaciones-2026 { padding: 20px 15px; }
-            .p1-text-container { padding: 18px; }
-            .p1-paragraph { font-size: 1rem; line-height: 2.4; text-align: left; }
-            .p1-select { max-width: 100%; width: 100%; margin: 4px 0; }
-            .p1-ctrl-btn { width: 100%; text-align: center; }
+        .ex1-card.correct { background: #f0fdf4 !important; border-color: #22c55e !important; }
+        .ex1-card.wrong { background: #fff1f2 !important; border-color: #f43f5e !important; }
+        
+        .ex-control-bar {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; padding-top: 20px; border-top: 2px dashed #e2e8f0;
         }
+        .ex-ctrl-btn {
+            padding: 12px 22px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s ease;
+        }
+        .btn-check { background: #8b5cf6; color: #ffffff; }
+        .btn-check:hover { background: #7c3aed; }
+        .btn-show { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .btn-reset { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+        .ex-score-box { display: none; text-align: center; font-size: 1.1rem; font-weight: 800; color: #45188c; margin-top: 15px; }
     </style>
 
-    <h2>📖 Parte 1: Una tarde de revelaciones</h2>
-    <div class="p1-instruction">Instrucción: Selecciona la expresión o palabra correcta para completar el texto.</div>
+    <h2>🎯 Ejercicio 1: Lee la definición e identifica el término</h2>
+    <div class="ex-instruction">Instrucción: Lee la explicación conceptual y selecciona la expresión del texto que corresponde.</div>
 
-    <!-- БАНК ВЫРАЖЕНИЙ -->
-    <div class="p1-pool">
-        <div class="p1-pool-title">💡 Expresiones clave del texto:</div>
-        <div class="p1-pool-list">
-            <span class="p1-pool-item">el atardecer</span>
-            <span class="p1-pool-item">voy a cumplir 30 años</span>
-            <span class="p1-pool-item">no retorno</span>
-            <span class="p1-pool-item">no estaba ni cerca de terminar</span>
-            <span class="p1-pool-item">desempacar las cajas</span>
-            <span class="p1-pool-item">sobrecargada</span>
-            <span class="p1-pool-item">sobreproductividad</span>
-            <span class="p1-pool-item">supervisor</span>
-            <span class="p1-pool-item">inversiones</span>
-            <span class="p1-pool-item">invertir dinero</span>
-            <span class="p1-pool-item">combatir la ansiedad</span>
-            <span class="p1-pool-item">herramientas</span>
-            <span class="p1-pool-item">De vez en cuando</span>
-            <span class="p1-pool-item">a su juicio</span>
-            <span class="p1-pool-item">subir de peso</span>
-            <span class="p1-pool-item">ganar peso</span>
-            <span class="p1-pool-item">Me suena este problema</span>
-            <span class="p1-pool-item">Es conocido</span>
-            <span class="p1-pool-item">los años 90</span>
-            <span class="p1-pool-item">los años 2000</span>
-            <span class="p1-pool-item">conozco este problema de sobra</span>
-            <span class="p1-pool-item">pensamientos superficiales</span>
-            <span class="p1-pool-item">juzgar</span>
-            <span class="p1-pool-item">la prueba</span>
-            <span class="p1-pool-item">el test</span>
-        </div>
-    </div>
-
-    <!-- ТЕКСТ С ВЫПАДАЮЩИМИ СПИСКАМИ -->
-    <div class="p1-text-container">
-
-        <!-- АБЗАЦ 1 -->
-        <div class="p1-paragraph">
-            Era 
-            <select class="p1-select" id="p1Sel1" data-ans="el atardecer">
-                <option value="">-- selecciona --</option>
-                <option value="el amanecer">el amanecer</option>
-                <option value="el atardecer">el atardecer</option>
-                <option value="la medianoche">la medianoche</option>
+    <div class="ex1-list">
+        <div class="ex1-card" id="ex1_c1" data-ans="amiga cactus">
+            <div class="ex1-def-text">1. Persona cercana con trato afable pero que lanza comentarios hirientes o críticas punzantes sin previo aviso:</div>
+            <select class="ex1-select" id="ex1_s1">
+                <option value="">-- selecciona la expresión --</option>
+                <option value="amiga cactus">amiga cactus</option>
+                <option value="jerga de allá">jerga de allá</option>
+                <option value="comportamiento">comportamiento</option>
             </select>
-            de un martes cualquiera. Valeria miraba por la ventana con una taza de té entre las manos. Faltaban solo dos semanas para su cumpleaños: «Madre mía, 
-            <select class="p1-select" id="p1Sel2" data-ans="voy a cumplir 30 años">
-                <option value="">-- selecciona --</option>
-                <option value="voy a cumplir 30 años">voy a cumplir 30 años</option>
-                <option value="tengo casi 20 años">tengo casi 20 años</option>
-                <option value="cumplí 40 años">cumplí 40 años</option>
+        </div>
+
+        <div class="ex1-card" id="ex1_c2" data-ans="darse de baja">
+            <div class="ex1-def-text">2. Cancelar una suscripción, membresía o servicio oficial que se pagaba periódicamente:</div>
+            <select class="ex1-select" id="ex1_s2">
+                <option value="">-- selecciona la expresión --</option>
+                <option value="deshacerse de">deshacerse de</option>
+                <option value="darse de baja">darse de baja</option>
+                <option value="dejar el trabajo">dejar el trabajo</option>
             </select>
-            », pensó. Esa frase resonaba en su cabeza como un punto de 
-            <select class="p1-select" id="p1Sel3" data-ans="no retorno">
-                <option value="">-- selecciona --</option>
-                <option value="partida">partida</option>
-                <option value="no retorno">no retorno</option>
-                <option value="encuentro">encuentro</option>
-            </select>.
         </div>
 
-        <!-- АБЗАЦ 2 -->
-        <div class="p1-paragraph">
-            Miró a su alrededor. El salón estaba lleno de cajas sin abrir. Llevaba dos semanas en el nuevo piso y 
-            <select class="p1-select" id="p1Sel4" data-ans="no estaba ni cerca de terminar">
-                <option value="">-- selecciona --</option>
-                <option value="ya había terminado">ya había terminado</option>
-                <option value="no estaba ni cerca de terminar">no estaba ni cerca de terminar</option>
-                <option value="estaba a punto">estaba a punto</option>
+        <div class="ex1-card" id="ex1_c3" data-ans="echar la culpa a">
+            <div class="ex1-def-text">3. Atribuir la responsabilidad de un problema o error a un tercero o a las circunstancias:</div>
+            <select class="ex1-select" id="ex1_s3">
+                <option value="">-- selecciona la expresión --</option>
+                <option value="echar la culpa a">echar la culpa a</option>
+                <option value="promover">promover</option>
+                <option value="teorizar">teorizar</option>
             </select>
-            de 
-            <select class="p1-select" id="p1Sel5" data-ans="desempacar las cajas">
-                <option value="">-- selecciona --</option>
-                <option value="guardar las cajas">guardar las cajas</option>
-                <option value="desempacar las cajas">desempacar las cajas</option>
-                <option value="comprar ropa">comprar ropa</option>
-            </select>. Se sentía completamente 
-            <select class="p1-select" id="p1Sel6" data-ans="sobrecargada">
-                <option value="">-- selecciona --</option>
-                <option value="relajada">relajada</option>
-                <option value="sobrecargada">sobrecargada</option>
-                <option value="aburrida">aburrida</option>
-            </select>.
         </div>
 
-        <!-- АБЗАЦ 3 -->
-        <div class="p1-paragraph">
-            Su vida se había convertido en un monumento a la 
-            <select class="p1-select" id="p1Sel7" data-ans="sobreproductividad">
-                <option value="">-- selecciona --</option>
-                <option value="perezosidad">perezosidad</option>
-                <option value="sobreproductividad">sobreproductividad</option>
-                <option value="simplicidad">simplicidad</option>
-            </select>: trabajaba en una multinacional, tenía un 
-            <select class="p1-select" id="p1Sel8" data-ans="supervisor">
-                <option value="">-- selecciona --</option>
-                <option value="compañero">compañero</option>
-                <option value="supervisor">supervisor</option>
-                <option value="estudiante">estudiante</option>
-            </select> exigente, leía sobre 
-            <select class="p1-select" id="p1Sel9" data-ans="inversiones">
-                <option value="">-- selecciona --</option>
-                <option value="novelas">novelas</option>
-                <option value="inversiones">inversiones</option>
-                <option value="deportes">deportes</option>
-            </select> para 
-            <select class="p1-select" id="p1Sel10" data-ans="invertir dinero">
-                <option value="">-- selecciona --</option>
-                <option value="gastar dinero">gastar dinero</option>
-                <option value="invertir dinero">invertir dinero</option>
-                <option value="perder dinero">perder dinero</option>
-            </select> de forma inteligente y trataba de 
-            <select class="p1-select" id="p1Sel11" data-ans="combatir la ansiedad">
-                <option value="">-- selecciona --</option>
-                <option value="combatir la ansiedad">combatir la ansiedad</option>
-                <option value="ignorar la salud">ignorar la salud</option>
-                <option value="buscar problemas">buscar problemas</option>
-            </select> usando todas las 
-            <select class="p1-select" id="p1Sel12" data-ans="herramientas">
-                <option value="">-- selecciona --</option>
-                <option value="herramientas">herramientas</option>
-                <option value="aplicaciones">aplicaciones</option>
-                <option value="recetas">recetas</option>
-            </select> de psicología que leía en internet. 
-            <select class="p1-select" id="p1Sel13" data-ans="De vez en cuando">
-                <option value="">-- selecciona --</option>
-                <option value="Todos los días">Todos los días</option>
-                <option value="De vez en cuando">De vez en cuando</option>
-                <option value="Nunca">Nunca</option>
-            </select> intentaba relajarse, pero 
-            <select class="p1-select" id="p1Sel14" data-ans="a su juicio">
-                <option value="">-- selecciona --</option>
-                <option value="a su juicio">a su juicio</option>
-                <option value="por suerte">por suerte</option>
-                <option value="sin duda">sin duda</option>
-            </select>, nada funcionaba del todo.
+        <div class="ex1-card" id="ex1_c4" data-ans="albóndigas">
+            <div class="ex1-def-text">4. Bolas de carne picada sazonada y cocinada generalmente en salsa:</div>
+            <select class="ex1-select" id="ex1_s4">
+                <option value="">-- selecciona la expresión --</option>
+                <option value="albóndigas">albóndigas</option>
+                <option value="laburo">laburo</option>
+                <option value="la cortesía">la cortesía</option>
+            </select>
         </div>
 
-        <!-- АБЗАЦ 4 -->
-        <div class="p1-paragraph">
-            Llevaba meses intentando no 
-            <select class="p1-select" id="p1Sel15" data-ans="subir de peso">
-                <option value="">-- selecciona --</option>
-                <option value="bajar de peso">bajar de peso</option>
-                <option value="subir de peso">subir de peso</option>
-                <option value="cambiar de ropa">cambiar de ropa</option>
-            </select> (o 
-            <select class="p1-select" id="p1Sel16" data-ans="ganar peso">
-                <option value="">-- selecciona --</option>
-                <option value="perder peso">perder peso</option>
-                <option value="ganar peso">ganar peso</option>
-                <option value="mantener el peso">mantener el peso</option>
-            </select>, como decían en los libros), pero el estrés la llevaba a comer de más. «
-            <select class="p1-select" id="p1Sel17" data-ans="Me suena este problema">
-                <option value="">-- selecciona --</option>
-                <option value="No entiendo nada">No entiendo nada</option>
-                <option value="Me suena este problema">Me suena este problema</option>
-                <option value="Me encanta esto">Me encanta esto</option>
-            </select>», pensó. 
-            <select class="p1-select" id="p1Sel18" data-ans="Es conocido">
-                <option value="">-- selecciona --</option>
-                <option value="Es desconocido">Es desconocido</option>
-                <option value="Es conocido">Es conocido</option>
-                <option value="Es imposible">Es imposible</option>
-            </select> para cualquiera que haya vivido su juventud entre 
-            <select class="p1-select" id="p1Sel19" data-ans="los años 90">
-                <option value="">-- selecciona --</option>
-                <option value="los años 80">los años 80</option>
-                <option value="los años 90">los años 90</option>
-                <option value="los años 60">los años 60</option>
-            </select> y 
-            <select class="p1-select" id="p1Sel20" data-ans="los años 2000">
-                <option value="">-- selecciona --</option>
-                <option value="los años 2000">los años 2000</option>
-                <option value="el siglo XIX">el siglo XIX</option>
-                <option value="el futuro">el futuro</option>
-            </select>. 
-            <select class="p1-select" id="p1Sel21" data-ans="Conozco este problema de sobra">
-                <option value="">-- selecciona --</option>
-                <option value="No conozco este problema">No conozco este problema</option>
-                <option value="Conozco este problema de sobra">Conozco este problema de sobra</option>
-                <option value="Me da igual">Me da igual</option>
-            </select>: el cuerpo reacciona cuando la mente no para.
-        </div>
-
-        <!-- АБЗАЦ 5 -->
-        <div class="p1-paragraph">
-            Sus 
-            <select class="p1-select" id="p1Sel22" data-ans="pensamientos superficiales">
-                <option value="">-- selecciona --</option>
-                <option value="ideas geniales">ideas geniales</option>
-                <option value="pensamientos superficiales">pensamientos superficiales</option>
-                <option value="sueños profundos">sueños profundos</option>
-            </select> sobre el éxito no la dejaban en paz. Solía 
-            <select class="p1-select" id="p1Sel23" data-ans="juzgar">
-                <option value="">-- selecciona --</option>
-                <option value="ayudar">ayudar</option>
+        <div class="ex1-card" id="ex1_c5" data-ans="deshacerse de">
+            <div class="ex1-def-text">5. Desprenderse, eliminar o liberarse de algo que resulta molesto, pesado o innecesario:</div>
+            <select class="ex1-select" id="ex1_s5">
+                <option value="">-- selecciona la expresión --</option>
+                <option value="filtrada por">filtrada por</option>
+                <option value="deshacerse de">deshacerse de</option>
                 <option value="juzgar">juzgar</option>
-                <option value="admirar">admirar</option>
-            </select> a los demás por su falta de disciplina, pero ahora era ella quien se enfrentaba a 
-            <select class="p1-select" id="p1Sel24" data-ans="la prueba">
-                <option value="">-- selecciona --</option>
-                <option value="la prueba">la prueba</option>
-                <option value="la rutina">la rutina</option>
-                <option value="el regalo">el regalo</option>
-            </select> (o 
-            <select class="p1-select" id="p1Sel25" data-ans="el test">
-                <option value="">-- selecciona --</option>
-                <option value="el juego">el juego</option>
-                <option value="el test">el test</option>
-                <option value="el libro">el libro</option>
-            </select>) de su propia vida.
+            </select>
         </div>
-
     </div>
 
-    <!-- Результат -->
-    <div class="p1-score-box" id="p1ScoreBox"></div>
+    <div class="ex-score-box" id="ex1_score"></div>
 
-    <!-- Панель управления -->
-    <div class="p1-control-bar">
-        <button class="p1-ctrl-btn p1-btn-check" onclick="checkP1Answers()">✅ Проверить ответы</button>
-        <button class="p1-ctrl-btn p1-btn-show" onclick="showP1Answers()">👁️ Показать правильные ответы</button>
-        <button class="p1-ctrl-btn p1-btn-reset" onclick="resetP1Activity()">🔄 Начать заново</button>
+    <div class="ex-control-bar">
+        <button class="ex-ctrl-btn btn-check" onclick="checkEx1()">✅ Comprobar</button>
+        <button class="ex-ctrl-btn btn-show" onclick="showEx1()">👁️ Ver respuestas</button>
+        <button class="ex-ctrl-btn btn-reset" onclick="resetEx1()">🔄 Reiniciar</button>
     </div>
 
     <script>
-        const totalP1Items = 25;
-
-        function checkP1Answers() {
-            let correctCount = 0;
-            let allAnswered = true;
-
-            for (let i = 1; i <= totalP1Items; i++) {
-                const select = document.getElementById('p1Sel' + i);
-                if (!select.value) {
-                    allAnswered = false;
-                    break;
-                }
+        function checkEx1() {
+            let correct = 0;
+            for(let i=1; i<=5; i++) {
+                const card = document.getElementById('ex1_c' + i);
+                const sel = document.getElementById('ex1_s' + i);
+                card.classList.remove('correct', 'wrong');
+                if(sel.value === card.getAttribute('data-ans')) {
+                    card.classList.add('correct'); correct++;
+                } else { card.classList.add('wrong'); }
             }
-
-            if (!allAnswered) {
-                alert('Пожалуйста, выбери варианты для всех предложений перед проверкой!');
-                return;
-            }
-
-            for (let i = 1; i <= totalP1Items; i++) {
-                const select = document.getElementById('p1Sel' + i);
-                const correctVal = select.getAttribute('data-ans');
-
-                select.classList.remove('correct', 'wrong');
-
-                if (select.value === correctVal) {
-                    select.classList.add('correct');
-                    correctCount++;
-                } else {
-                    select.classList.add('wrong');
-                }
-            }
-
-            const scoreBox = document.getElementById('p1ScoreBox');
-            scoreBox.innerText = '📊 Твой результат: ' + correctCount + ' из ' + totalP1Items + ' верных фраз!';
-            scoreBox.style.display = 'block';
+            const sb = document.getElementById('ex1_score');
+            sb.innerText = `📊 Resultado: ${correct} de 5 correctas`;
+            sb.style.display = 'block';
         }
-
-        function showP1Answers() {
-            for (let i = 1; i <= totalP1Items; i++) {
-                const select = document.getElementById('p1Sel' + i);
-                const correctVal = select.getAttribute('data-ans');
-
-                select.value = correctVal;
-                select.classList.remove('wrong');
-                select.classList.add('correct');
+        function showEx1() {
+            for(let i=1; i<=5; i++) {
+                const card = document.getElementById('ex1_c' + i);
+                const sel = document.getElementById('ex1_s' + i);
+                sel.value = card.getAttribute('data-ans');
+                card.classList.remove('wrong'); card.classList.add('correct');
             }
-
-            const scoreBox = document.getElementById('p1ScoreBox');
-            scoreBox.innerText = '🔑 Все правильные выражения автоматически выбраны.';
-            scoreBox.style.display = 'block';
         }
-
-        function resetP1Activity() {
-            for (let i = 1; i <= totalP1Items; i++) {
-                const select = document.getElementById('p1Sel' + i);
-
-                select.value = '';
-                select.classList.remove('correct', 'wrong');
+        function resetEx1() {
+            for(let i=1; i<=5; i++) {
+                const card = document.getElementById('ex1_c' + i);
+                const sel = document.getElementById('ex1_s' + i);
+                sel.value = ''; card.classList.remove('correct', 'wrong');
             }
-
-            const scoreBox = document.getElementById('p1ScoreBox');
-            scoreBox.style.display = 'none';
-            scoreBox.innerText = '';
+            document.getElementById('ex1_score').style.display = 'none';
         }
     </script>
 </div>
