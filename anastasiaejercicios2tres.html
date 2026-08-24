@@ -1,0 +1,100 @@
+<div class="ex-isolation" id="ex3-text-gaps-2026">
+    <style>
+        #ex3-text-gaps-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 980px;
+            margin: 20px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.06);
+            color: #2c3e50;
+        }
+        #ex3-text-gaps-2026 h2 {
+            color: #45188c; text-align: center; margin-bottom: 6px; text-transform: uppercase; font-size: 1.35rem; font-weight: 800;
+        }
+        #ex3-text-gaps-2026 .ex-instruction {
+            text-align: center; color: #64748b; font-style: italic; margin-bottom: 25px; font-size: 0.98rem;
+        }
+        .ex3-text-box {
+            background: #fdfbff; border: 1px solid #e9d5ff; border-radius: 20px; padding: 30px; font-size: 1.05rem; line-height: 2.6; color: #334155; text-align: justify;
+        }
+        .ex3-input {
+            border: 2px solid #cbd5e1; border-radius: 8px; padding: 4px 8px; font-size: 0.95rem; font-weight: 700; color: #45188c; outline: none; background: #ffffff; transition: all 0.2s ease; margin: 0 3px; text-align: center;
+        }
+        .ex3-input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15); }
+        .ex3-input.correct { border-color: #22c55e !important; background-color: #dcfce7 !important; color: #15803d !important; }
+        .ex3-input.wrong { border-color: #f43f5e !important; background-color: #ffe4e6 !important; color: #be123c !important; }
+        
+        .ex-control-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 30px; padding-top: 20px; border-top: 2px dashed #e2e8f0; }
+        .ex-ctrl-btn { padding: 12px 22px; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; border: none; }
+        .btn-check { background: #8b5cf6; color: #ffffff; }
+        .btn-show { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .btn-reset { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+        .ex-score-box { display: none; text-align: center; font-size: 1.1rem; font-weight: 800; color: #45188c; margin-top: 15px; }
+    </style>
+
+    <h2>📝 Ejercicio 3: Reconstruye el texto completando los huecos</h2>
+    <div class="ex-instruction">Instrucción: Escribe las expresiones y palabras en negrita faltantes sin mirar la hoja original.</div>
+
+    <div class="ex3-text-box">
+        <p>Para despejarse, Valeria decidió llamar a su amiga Marta. Marta era lo que Valeria llamaba una «<input class="ex3-input" id="ex3_1" data-ans="amiga cactus" style="width: 140px;">»: una persona <input class="ex3-input" id="ex3_2" data-ans="amistosa" style="width: 100px;">, pero que de vez en cuando te punza con comentarios que te hacen <input class="ex3-input" id="ex3_3" data-ans="juzgar" style="width: 80px;"> toda tu vida.</p>
+
+        <p>—Valeria, tía, tienes que <input class="ex3-input" id="ex3_4" data-ans="deshacerte de" style="width: 150px;"> tanta carga —le dijo Marta por teléfono—. Por cierto, ¿ya llamaste al gimnasio para <input class="ex3-input" id="ex3_5" data-ans="darte de baja" style="width: 130px;">? Tu <input class="ex3-input" id="ex3_6" data-ans="entrenador" style="width: 110px;"> ya me preguntó por ti. Sigues pagando la cuota y no vas nunca. Es tirar el dinero.</p>
+
+        <p>—Tienes razón —suspiró Valeria—. Mañana mismo <input class="ex3-input" id="ex3_7" data-ans="me doy de baja" style="width: 140px;">. Necesito liberarme de compromisos absurdos.</p>
+
+        <p>—Y deja de <input class="ex3-input" id="ex3_8" data-ans="echar la culpa a" style="width: 160px;"> la falta de tiempo —continuó Marta—. <input class="ex3-input" id="ex3_9" data-ans="Teorizar" style="width: 95px;"> sobre tu vida no va a cambiarla. <input class="ex3-input" id="ex3_10" data-ans="La conducta" style="width: 120px;"> que tienes con el trabajo no es sana. <input class="ex3-input" id="ex3_11" data-ans="El hábito" style="width: 90px;"> o <input class="ex3-input" id="ex3_12" data-ans="la costumbre" style="width: 120px;"> de autoexigirte tanto destruye tu <input class="ex3-input" id="ex3_13" data-ans="comportamiento" style="width: 160px;">. Tu mente está <input class="ex3-input" id="ex3_14" data-ans="filtrada por" style="width: 120px;"> el perfeccionismo: solo ves <input class="ex3-input" id="ex3_15" data-ans="los fracasos" style="width: 110px;"> y no <input class="ex3-input" id="ex3_16" data-ans="celebras" style="width: 90px;"> los <input class="ex3-input" id="ex3_17" data-ans="éxitos" style="width: 80px;">. Y <input class="ex3-input" id="ex3_18" data-ans="me aburro" style="width: 100px;"> estando en casa todo el día escuchando tus <input class="ex3-input" id="ex3_19" data-ans="quejas" style="width: 80px;"> si no vas a hacer nada.</p>
+
+        <p>—Es verdad... —admitió Valeria—. <input class="ex3-input" id="ex3_20" data-ans="Todavía" style="width: 90px;"> tengo ese problema. A veces me dan ganas de <input class="ex3-input" id="ex3_21" data-ans="dejar el trabajo" style="width: 150px;"> para sentir que realmente <input class="ex3-input" id="ex3_22" data-ans="estoy viva" style="width: 100px;">.</p>
+
+        <p>—Bueno, tampoco exageres —se rió Marta—. No hace falta dejar <input class="ex3-input" id="ex3_23" data-ans="el curro" style="width: 90px;"> (o <input class="ex3-input" id="ex3_24" data-ans="el laburo" style="width: 90px;">, como dirían tus amigos argentinos, ya sabes cómo es <input class="ex3-input" id="ex3_25" data-ans="la jerga" style="width: 90px;"> de allá). La cuestión es <input class="ex3-input" id="ex3_26" data-ans="promover" style="width: 100px;"> un estilo de vida más tranquilo sin caer en <input class="ex3-input" id="ex3_27" data-ans="el aburrimiento" style="width: 140px;"> ni tratar la vida como una chuleta de examen.</p>
+
+        <p>—Tienes razón. Mañana mismo voy al gimnasio, le <input class="ex3-input" id="ex3_28" data-ans="hablo" style="width: 70px;"> con <input class="ex3-input" id="ex3_29" data-ans="la cortesía" style="width: 100px;"> adecuada a la recepcionista y me doy de baja. Luego me preparo unas <input class="ex3-input" id="ex3_30" data-ans="albóndigas" style="width: 110px;"> ricas y me pongo a descansar.</p>
+    </div>
+
+    <div class="ex-score-box" id="ex3_score"></div>
+
+    <div class="ex-control-bar">
+        <button class="ex-ctrl-btn btn-check" onclick="checkEx3()">✅ Comprobar</button>
+        <button class="ex-ctrl-btn btn-show" onclick="showEx3()">👁️ Ver respuestas</button>
+        <button class="ex-ctrl-btn btn-reset" onclick="resetEx3()">🔄 Reiniciar</button>
+    </div>
+
+    <script>
+        const totalEx3 = 30;
+        function clean(s) {
+            return s.trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+        }
+        function checkEx3() {
+            let correct = 0;
+            for(let i=1; i<=totalEx3; i++) {
+                const inp = document.getElementById('ex3_' + i);
+                const user = clean(inp.value);
+                const target = clean(inp.getAttribute('data-ans'));
+                inp.classList.remove('correct', 'wrong');
+                if(user === target) {
+                    inp.classList.add('correct'); correct++;
+                } else { inp.classList.add('wrong'); }
+            }
+            const sb = document.getElementById('ex3_score');
+            sb.innerText = `📊 Resultado: ${correct} de ${totalEx3} huecos correctos`;
+            sb.style.display = 'block';
+        }
+        function showEx3() {
+            for(let i=1; i<=totalEx3; i++) {
+                const inp = document.getElementById('ex3_' + i);
+                inp.value = inp.getAttribute('data-ans');
+                inp.classList.remove('wrong'); inp.classList.add('correct');
+            }
+        }
+        function resetEx3() {
+            for(let i=1; i<=totalEx3; i++) {
+                const inp = document.getElementById('ex3_' + i);
+                inp.value = ''; inp.classList.remove('correct', 'wrong');
+            }
+            document.getElementById('ex3_score').style.display = 'none';
+        }
+    </script>
+</div>
