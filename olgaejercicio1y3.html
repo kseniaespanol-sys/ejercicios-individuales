@@ -1,0 +1,448 @@
+<div class="ex-isolation" id="find-errors-marta-2026">
+    <style>
+        #find-errors-marta-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 980px;
+            margin: 20px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.06);
+            color: #2c3e50;
+        }
+
+        #find-errors-marta-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        #find-errors-marta-2026 .err-instruction {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        /* Текстовый блок */
+        .err-text-box {
+            background: #fdfbff;
+            border: 2px solid #e9d5ff;
+            border-radius: 20px;
+            padding: 30px;
+            font-size: 1.12rem;
+            line-height: 2.5;
+            color: #334155;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        /* Кликабельные слова */
+        .err-word {
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .err-word:hover {
+            background: #f1f5f9;
+            color: #45188c;
+        }
+
+        .err-word.selected {
+            background: #ffe4e6 !important;
+            color: #be123c !important;
+            font-weight: 700;
+            border-bottom: 2px solid #f43f5e;
+        }
+
+        .err-word.correct-found {
+            background: #dcfce7 !important;
+            color: #15803d !important;
+            font-weight: 800;
+            border-bottom: 2px solid #22c55e;
+        }
+
+        /* Список карточек для исправления */
+        .err-corrections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .err-card {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 5px solid #8b5cf6;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .err-card-header {
+            font-weight: 800;
+            font-size: 1rem;
+            color: #45188c;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .err-bad-text {
+            background: #ffe4e6;
+            color: #be123c;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .err-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 12px;
+        }
+
+        .err-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #334155;
+            outline: none;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .err-input:focus {
+            border-color: #8b5cf6;
+        }
+
+        .err-input.correct {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+            color: #15803d !important;
+        }
+
+        .err-expl-feedback {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #22c55e;
+        }
+
+        /* Панель управления */
+        .err-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .err-ctrl-btn {
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .err-btn-check {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .err-btn-check:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        .err-btn-show {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .err-btn-show:hover {
+            background: #e2e8f0;
+        }
+
+        .err-btn-reset {
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+        }
+
+        .err-btn-reset:hover {
+            background: #ffe4e6;
+        }
+
+        .err-score-box {
+            display: none;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #45188c;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        @media (max-width: 650px) {
+            #find-errors-marta-2026 { padding: 20px 15px; }
+            .err-text-box { padding: 18px; font-size: 1rem; line-height: 2.3; }
+            .err-inputs-grid { grid-template-columns: 1fr; }
+            .err-ctrl-btn { width: 100%; text-align: center; }
+        }
+    </style>
+
+    <h2>🕵️‍♀️ Detector de Errores: La historia de Marta</h2>
+    <div class="err-instruction">
+        Instrucción: En este texto hay <b>8 errores</b>. Haz clic sobre las palabras incorrectas para marcarlas y escribe su corrección con una breve explicación abajo.
+    </div>
+
+    <!-- ТЕКСТ С КЛИКАБЕЛЬНЫМИ СЛОВАМИ -->
+    <div class="err-text-box" id="errTextBox">
+        Hoy Marta va de cabeza. Su marido no se ha podido llevar a los niños 
+        <span class="err-word" data-err-id="1">del</span> colegio porque el coche no funcionaba, así que ella ha tenido que 
+        <span class="err-word" data-err-id="2">buscar</span> a los niños a pie. Como tiene una reunión online 
+        <span class="err-word" data-err-id="3">después</span> de una hora, Elena decide 
+        <span class="err-word" data-err-id="4">quedar</span> en el centro e ir a 
+        <span class="err-word" data-err-id="5">tomar</span> un vaso de agua mientras la espera. 
+        Más tarde, cuando se ven en la cafetería, Elena le cuenta que ha visto a una chica que 
+        <span class="err-word" data-err-id="6">parece</span> a la hermana de Marta. Por su parte, Marta le confiesa que en la reunión casi se ríe en la cara de su jefe cuando un cliente se ha puesto a cantar. 
+        Al salir del bar, entran a una tienda, pero a Marta no le gusta un jersey porque dice que no le 
+        <span class="err-word" data-err-id="7">cubre</span> bien la espalda y el color no le queda a su tono de piel. Al final, las dos 
+        <span class="err-word" data-err-id="8">se quedan</span> para cenar el sábado si Marta puede, y se despiden rápidamente porque Marta tiene que llevar a los niños del taller extraescolar dentro de comer.
+    </div>
+
+    <!-- КОНТЕЙНЕР ДЛЯ ПОЛЕЙ ВВОДА -->
+    <div class="err-corrections-container" id="errCorrectionsBox">
+        <div style="text-align: center; color: #94a3b8; font-style: italic;" id="errEmptyMsg">
+            Haz clic sobre cualquier palabra del texto para empezar a corregir...
+        </div>
+    </div>
+
+    <!-- Результат -->
+    <div class="err-score-box" id="errScoreBox"></div>
+
+    <!-- Панель управления -->
+    <div class="err-control-bar">
+        <button class="err-ctrl-btn err-btn-check" onclick="checkErrAnswers()">✅ Проверить ошибки</button>
+        <button class="err-ctrl-btn err-btn-show" onclick="showErrAnswers()">👁️ Показать решение и ключи</button>
+        <button class="err-ctrl-btn err-btn-reset" onclick="resetErrActivity()">🔄 Начать заново</button>
+    </div>
+
+    <script>
+        const errorsKey = {
+            "1": {
+                bad: "del",
+                correct: ["al"],
+                explain: "Llevar a alguien AL colegio (Dirección hacia el colegio, no procedencia)."
+            },
+            "2": {
+                bad: "buscar",
+                correct: ["llevar", "ir a llevar"],
+                explain: "Llevar a los niños (Va de camino hacia el colegio, no a recogerlos)."
+            },
+            "3": {
+                bad: "después",
+                correct: ["dentro"],
+                explain: "Dentro de una hora (Futuro contado desde el momento presente)."
+            },
+            "4": {
+                bad: "quedar",
+                correct: ["quedarse"],
+                explain: "Quedarse en el centro (Permanecer en un sitio exige verbo reflexivo)."
+            },
+            "5": {
+                bad: "tomar",
+                correct: ["beber"],
+                explain: "Beber un vaso de agua (En España el agua se bebe, 'tomar agua' suena a calca)."
+            },
+            "6": {
+                bad: "parece",
+                correct: ["se parece", "se parecía"],
+                explain: "Se parece a (Semejanza física exige la forma reflexiva + preposición A)."
+            },
+            "7": {
+                bad: "cubre",
+                correct: ["tapa"],
+                explain: "No le tapa la espalda (Uso natural de ropa en el diálogo: 'no me cubre/tapa')."
+            },
+            "8": {
+                bad: "se quedan",
+                correct: ["quedan"],
+                explain: "Quedan para cenar (Acordar una cita o plan es el verbo 'quedar' sin pronombre)."
+            }
+        };
+
+        const selectedErrors = new Set();
+
+        // Вешаем слушатели кликов на все слова в тексте
+        document.querySelectorAll('#errTextBox .err-word').forEach(wordEl => {
+            wordEl.addEventListener('click', function() {
+                const errId = this.getAttribute('data-err-id');
+                
+                if (selectedErrors.has(errId)) {
+                    selectedErrors.delete(errId);
+                    this.classList.remove('selected');
+                    removeCorrectionCard(errId);
+                } else {
+                    selectedErrors.add(errId);
+                    this.classList.add('selected');
+                    addCorrectionCard(errId, this.innerText.trim());
+                }
+
+                toggleEmptyMsg();
+            });
+        });
+
+        function toggleEmptyMsg() {
+            const emptyMsg = document.getElementById('errEmptyMsg');
+            if (selectedErrors.size === 0) {
+                emptyMsg.style.display = 'block';
+            } else {
+                emptyMsg.style.display = 'none';
+            }
+        }
+
+        function addCorrectionCard(id, badWordText) {
+            const container = document.getElementById('errCorrectionsBox');
+
+            const card = document.createElement('div');
+            card.className = 'err-card';
+            card.id = 'errCard_' + id;
+            card.innerHTML = `
+                <div class="err-card-header">
+                    <span>Palabra seleccionada: <span class="err-bad-text">${badWordText}</span></span>
+                    <span style="font-size:0.8rem; color:#64748b; cursor:pointer;" onclick="deselectWord('${id}')">❌ quitar</span>
+                </div>
+                <div class="err-inputs-grid">
+                    <input class="err-input" id="errInpCorr_${id}" placeholder="Tu corrección (ej: al, quedarse)..." autocomplete="off">
+                    <input class="err-input" id="errInpExpl_${id}" placeholder="Explicación de por qué estaba mal..." autocomplete="off">
+                </div>
+                <div class="err-expl-feedback" id="errFb_${id}"></div>
+            `;
+            container.appendChild(card);
+        }
+
+        function removeCorrectionCard(id) {
+            const card = document.getElementById('errCard_' + id);
+            if (card) card.remove();
+        }
+
+        function deselectWord(id) {
+            selectedErrors.delete(id);
+            const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
+            if (wordEl) wordEl.classList.remove('selected');
+            removeCorrectionCard(id);
+            toggleEmptyMsg();
+        }
+
+        function checkErrAnswers() {
+            let correctFoundCount = 0;
+
+            selectedErrors.forEach(id => {
+                const key = errorsKey[id];
+                const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
+                const inpCorr = document.getElementById('errInpCorr_' + id);
+                const fb = document.getElementById('errFb_' + id);
+
+                if (key) {
+                    // Это действительно ошибка
+                    wordEl.classList.remove('selected');
+                    wordEl.classList.add('correct-found');
+                    correctFoundCount++;
+
+                    const userVal = inpCorr.value.trim().toLowerCase();
+                    const isCorrRight = key.correct.some(c => c.toLowerCase() === userVal);
+
+                    if (isCorrRight) {
+                        inpCorr.classList.add('correct');
+                    }
+
+                    fb.innerHTML = `💡 <b>Clave oficial:</b> ${key.correct.join(' / ')}<br><i>${key.explain}</i>`;
+                    fb.style.display = 'block';
+                }
+            });
+
+            const scoreBox = document.getElementById('errScoreBox');
+            scoreBox.innerHTML = `📊 Detectaste <b>${correctFoundCount}</b> de 8 errores reales en el texto!`;
+            scoreBox.style.display = 'block';
+        }
+
+        function showErrAnswers() {
+            // Выделяем все 8 ошибок
+            for (let id = 1; id <= 8; id++) {
+                const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
+                if (!selectedErrors.has(String(id))) {
+                    selectedErrors.add(String(id));
+                    addCorrectionCard(String(id), wordEl.innerText.trim());
+                }
+                wordEl.classList.remove('selected');
+                wordEl.classList.add('correct-found');
+
+                const key = errorsKey[id];
+                const inpCorr = document.getElementById('errInpCorr_' + id);
+                const fb = document.getElementById('errFb_' + id);
+
+                if (inpCorr) {
+                    inpCorr.value = key.correct[0];
+                    inpCorr.classList.add('correct');
+                }
+
+                if (fb) {
+                    fb.innerHTML = `💡 <b>Clave oficial:</b> ${key.correct.join(' / ')}<br><i>${key.explain}</i>`;
+                    fb.style.display = 'block';
+                }
+            }
+
+            toggleEmptyMsg();
+
+            const scoreBox = document.getElementById('errScoreBox');
+            scoreBox.innerText = '🔑 Se han marcado los 8 errores con sus correcciones y explicaciones oficiales.';
+            scoreBox.style.display = 'block';
+        }
+
+        function resetErrActivity() {
+            selectedErrors.clear();
+
+            document.querySelectorAll('#errTextBox .err-word').forEach(el => {
+                el.className = 'err-word';
+            });
+
+            document.getElementById('errCorrectionsBox').innerHTML = `
+                <div style="text-align: center; color: #94a3b8; font-style: italic;" id="errEmptyMsg">
+                    Haz clic sobre cualquier palabra del texto para empezar a corregir...
+                </div>
+            `;
+
+            const scoreBox = document.getElementById('errScoreBox');
+            scoreBox.style.display = 'none';
+            scoreBox.innerText = '';
+        }
+    </script>
+</div>
