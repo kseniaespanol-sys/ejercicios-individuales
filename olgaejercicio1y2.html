@@ -1,0 +1,509 @@
+<div class="ex-isolation" id="sequence-dialogos-2026">
+    <style>
+        #sequence-dialogos-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 950px;
+            margin: 20px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.06);
+            color: #2c3e50;
+        }
+
+        #sequence-dialogos-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        #sequence-dialogos-2026 .seq-instruction {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .seq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .seq-card {
+            background: #fdfbff;
+            border: 1px solid #e9d5ff;
+            border-radius: 18px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .seq-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .seq-order-select {
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #45188c;
+            background: #ffffff;
+            cursor: pointer;
+            outline: none;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .seq-order-select:focus {
+            border-color: #8b5cf6;
+        }
+
+        .seq-order-select.correct {
+            border-color: #22c55e !important;
+            background-color: #dcfce7 !important;
+            color: #15803d !important;
+        }
+
+        .seq-order-select.wrong {
+            border-color: #f43f5e !important;
+            background-color: #ffe4e6 !important;
+            color: #be123c !important;
+        }
+
+        .seq-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #334155;
+            flex: 1;
+        }
+
+        .seq-syn-box {
+            background: #f4f0ff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .seq-syn-label {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #581c87;
+        }
+
+        .seq-syn-input {
+            flex: 1;
+            min-width: 220px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #45188c;
+            outline: none;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .seq-syn-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .seq-syn-input.correct {
+            border-color: #22c55e !important;
+            background-color: #dcfce7 !important;
+            color: #15803d !important;
+        }
+
+        .seq-syn-input.wrong {
+            border-color: #f43f5e !important;
+            background-color: #ffe4e6 !important;
+            color: #be123c !important;
+        }
+
+        .seq-feedback {
+            display: none;
+            margin-top: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #22c55e;
+        }
+
+        /* Панель управления */
+        .seq-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .seq-ctrl-btn {
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .seq-btn-check {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .seq-btn-check:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        .seq-btn-show {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .seq-btn-show:hover {
+            background: #e2e8f0;
+        }
+
+        .seq-btn-reset {
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+        }
+
+        .seq-btn-reset:hover {
+            background: #ffe4e6;
+        }
+
+        .seq-score-box {
+            display: none;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #45188c;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        @media (max-width: 650px) {
+            #sequence-dialogos-2026 { padding: 20px 15px; }
+            .seq-card { padding: 15px; }
+            .seq-header { flex-direction: column; }
+            .seq-order-select { width: 100%; }
+            .seq-syn-input { min-width: 100%; }
+            .seq-ctrl-btn { width: 100%; text-align: center; }
+        }
+    </style>
+
+    <h2>🔢 Orden de Eventos y Expresiones Equivalentes</h2>
+    <div class="seq-instruction">
+        Instrucción: Ordena la secuencia del <b>1 al 8</b> según suceden las cosas en la historia.<br>
+        Además, escribe la expresión original del diálogo que equivale a la frase en <b>negrita</b>.
+    </div>
+
+    <div class="seq-list">
+
+        <!-- ФРАЗА A (Оригинальный порядок: 6) -->
+        <div class="seq-card" id="seqCard1" data-order="6">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd1">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Marta le explica a Elena que el jersey <b>no le sienta bien</b> y que <b>no le tapa la parte trasera del cuerpo</b> por el frío.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresiones del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn1" data-ans="no me queda nada bien / no me cubre bien la espalda" placeholder="Ej: no me queda nada bien / no me cubre..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb1">🔑 Original: «no me queda nada bien» / «no me cubre bien la espalda»</div>
+        </div>
+
+        <!-- ФРАЗА B (Оригинальный порядок: 5) -->
+        <div class="seq-card" id="seqCard2" data-order="5">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd2">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    En el bar, Marta admite que <b>tuvo que aguantar la risa</b> en su trabajo cuando un cliente empezó a cantar por error.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn2" data-ans="no me pude aguantar la risa" placeholder="Escribe la frase original..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb2">🔑 Original: «no me pude aguantar la risa»</div>
+        </div>
+
+        <!-- ФРАЗА C (Оригинальный порядок: 1) -->
+        <div class="seq-card" id="seqCard3" data-order="1">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd3">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Elena le propone a su amiga <b>consumir un café juntas</b> esa misma mañana.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn3" data-ans="tomar un café" placeholder="Escribe la frase original..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb3">🔑 Original: «tomar un café»</div>
+        </div>
+
+        <!-- ФРАЗА D (Оригинальный порядок: 2) -->
+        <div class="seq-card" id="seqCard4" data-order="2">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd4">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Marta explica que su pareja no ha podido <b>desplazar a los pequeños al cole</b> en coche.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn4" data-ans="llevar a los niños al colegio" placeholder="Escribe la frase original..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb4">🔑 Original: «llevar a los niños al colegio»</div>
+        </div>
+
+        <!-- ФРАЗА E (Оригинальный порядок: 4) -->
+        <div class="seq-card" id="seqCard5" data-order="4">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd5">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Elena le dice a Marta que una chica en la calle <b>tenía un aspecto muy similar</b> a su hermana Lucía.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn5" data-ans="se parecía muchísimo" placeholder="Escribe la frase original..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb5">🔑 Original: «se parecía muchísimo»</div>
+        </div>
+
+        <!-- ФРАЗА F (Оригинальный порядок: 8) -->
+        <div class="seq-card" id="seqCard6" data-order="8">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd6">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Marta <b>se marcha rápidamente</b> porque <b>en un plazo de diez minutos</b> debe <b>trasladar a los niños a su actividad</b>.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn6" data-ans="me tengo que ir volando / dentro de diez minutos / llevar a los niños" placeholder="Ej: me tengo que ir volando..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb6">🔑 Original: «me tengo que ir volando» / «dentro de diez minutos»</div>
+        </div>
+
+        <!-- ФРАЗА G (Оригинальный порядок: 3) -->
+        <div class="seq-card" id="seqCard7" data-order="3">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd7">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Elena propone <b>permanecer en la zona comercial</b> tras la cita de trabajo de Marta.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresión del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn7" data-ans="quedarse por el centro" placeholder="Escribe la frase original..." autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb7">🔑 Original: «quedarme por el centro» / «quedarse por el centro»</div>
+        </div>
+
+        <!-- ФРАЗА H (Оригинальный порядок: 7) -->
+        <div class="seq-card" id="seqCard8" data-order="7">
+            <div class="seq-header">
+                <select class="seq-order-select" id="seqOrd8">
+                    <option value="">Pos.</option>
+                    <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select>
+                <div class="seq-text">
+                    Las dos amigas <b>pactan una cita previa</b> para verse el fin de semana <b>si no hay imprevistos</b>.
+                </div>
+            </div>
+            <div class="seq-syn-box">
+                <span class="seq-syn-label">💡 Expresiones del diálogo:</span>
+                <input class="seq-syn-input" id="seqSyn8" data-ans="quedamos / si no surge nada raro" placeholder="Ej: quedamos / si no surge nada raro" autocomplete="off">
+            </div>
+            <div class="seq-feedback" id="seqFb8">🔑 Original: «quedamos» / «si no surge nada raro» (cuento con ello)</div>
+        </div>
+
+    </div>
+
+    <!-- Результат -->
+    <div class="seq-score-box" id="seqScoreBox"></div>
+
+    <!-- Панель управления -->
+    <div class="seq-control-bar">
+        <button class="seq-ctrl-btn seq-btn-check" onclick="checkSeqAnswers()">✅ Проверить ответы</button>
+        <button class="seq-ctrl-btn seq-btn-show" onclick="showSeqAnswers()">👁️ Показать правильный порядок</button>
+        <button class="seq-ctrl-btn seq-btn-reset" onclick="resetSeqActivity()">🔄 Начать заново</button>
+    </div>
+
+    <script>
+        const totalSeqItems = 8;
+
+        function cleanSeqString(str) {
+            return str.trim()
+                      .toLowerCase()
+                      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+                      .replace(/\s+/g, " ");
+        }
+
+        function checkSeqAnswers() {
+            let correctOrderCount = 0;
+            let correctSynCount = 0;
+
+            for (let i = 1; i <= totalSeqItems; i++) {
+                const card = document.getElementById('seqCard' + i);
+                const ordSelect = document.getElementById('seqOrd' + i);
+                const synInput = document.getElementById('seqSyn' + i);
+                const fb = document.getElementById('seqFb' + i);
+
+                const targetOrder = card.getAttribute('data-order');
+                const userOrder = ordSelect.value;
+
+                ordSelect.classList.remove('correct', 'wrong');
+                if (userOrder === targetOrder) {
+                    ordSelect.classList.add('correct');
+                    correctOrderCount++;
+                } else {
+                    ordSelect.classList.add('wrong');
+                }
+
+                const userSyn = cleanSeqString(synInput.value);
+                const targetSyn = cleanSeqString(synInput.getAttribute('data-ans'));
+
+                synInput.classList.remove('correct', 'wrong');
+                
+                // Гибкая проверка попадания ключевых слов
+                if (userSyn !== "" && targetSyn.includes(userSyn)) {
+                    synInput.classList.add('correct');
+                    correctSynCount++;
+                } else if (userSyn !== "") {
+                    // Если пользователь ввел хоть что-то близкое
+                    let isPartMatched = false;
+                    const parts = targetSyn.split('/');
+                    parts.forEach(p => {
+                        if (cleanSeqString(p).includes(userSyn) || userSyn.includes(cleanSeqString(p))) {
+                            isPartMatched = true;
+                        }
+                    });
+
+                    if (isPartMatched) {
+                        synInput.classList.add('correct');
+                        correctSynCount++;
+                    } else {
+                        synInput.classList.add('wrong');
+                    }
+                } else {
+                    synInput.classList.add('wrong');
+                }
+
+                fb.style.display = 'block';
+            }
+
+            const scoreBox = document.getElementById('seqScoreBox');
+            scoreBox.innerHTML = `📊 Порядок событий: <b>${correctOrderCount}/${totalSeqItems}</b> | Синонимы: <b>${correctSynCount}/${totalSeqItems}</b>`;
+            scoreBox.style.display = 'block';
+        }
+
+        function showSeqAnswers() {
+            for (let i = 1; i <= totalSeqItems; i++) {
+                const card = document.getElementById('seqCard' + i);
+                const ordSelect = document.getElementById('seqOrd' + i);
+                const synInput = document.getElementById('seqSyn' + i);
+                const fb = document.getElementById('seqFb' + i);
+
+                const targetOrder = card.getAttribute('data-order');
+                const targetSyn = synInput.getAttribute('data-ans');
+
+                ordSelect.value = targetOrder;
+                ordSelect.classList.remove('wrong');
+                ordSelect.classList.add('correct');
+
+                synInput.value = targetSyn;
+                synInput.classList.remove('wrong');
+                synInput.classList.add('correct');
+
+                fb.style.display = 'block';
+            }
+
+            const scoreBox = document.getElementById('seqScoreBox');
+            scoreBox.innerText = '🔑 Показан верный хронологический порядок и оригинальные выражения.';
+            scoreBox.style.display = 'block';
+        }
+
+        function resetSeqActivity() {
+            for (let i = 1; i <= totalSeqItems; i++) {
+                const ordSelect = document.getElementById('seqOrd' + i);
+                const synInput = document.getElementById('seqSyn' + i);
+                const fb = document.getElementById('seqFb' + i);
+
+                ordSelect.value = '';
+                ordSelect.classList.remove('correct', 'wrong');
+
+                synInput.value = '';
+                synInput.classList.remove('correct', 'wrong');
+
+                fb.style.display = 'none';
+            }
+
+            const scoreBox = document.getElementById('seqScoreBox');
+            scoreBox.style.display = 'none';
+            scoreBox.innerText = '';
+        }
+    </script>
+</div>
