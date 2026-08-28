@@ -49,7 +49,7 @@
             padding: 1px 4px;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             user-select: none;
         }
 
@@ -70,6 +70,12 @@
             color: #15803d !important;
             font-weight: 800;
             border-bottom: 2px solid #22c55e;
+        }
+
+        .err-word.false-alarm {
+            background: #fef3c7 !important;
+            color: #b45309 !important;
+            border-bottom: 2px solid #f59e0b;
         }
 
         /* Список карточек для исправления */
@@ -220,22 +226,22 @@
 
     <h2>🕵️‍♀️ Detector de Errores: La historia de Marta</h2>
     <div class="err-instruction">
-        Instrucción: En este texto hay <b>8 errores</b>. Haz clic sobre las palabras incorrectas para marcarlas y escribe su corrección con una breve explicación abajo.
+        Instrucción: En este texto hay <b>8 errores</b>. Haz clic sobre <b>cualquier palabra</b> para marcarla y escribe su corrección con una breve explicación abajo.
     </div>
 
-    <!-- ТЕКСТ С КЛИКАБЕЛЬНЫМИ СЛОВАМИ -->
+    <!-- ТЕКСТ (Все слова кликабельны) -->
     <div class="err-text-box" id="errTextBox">
         Hoy Marta va de cabeza. Su marido no se ha podido llevar a los niños 
-        <span class="err-word" data-err-id="1">del</span> colegio porque el coche no funcionaba, así que ella ha tenido que 
-        <span class="err-word" data-err-id="2">buscar</span> a los niños a pie. Como tiene una reunión online 
-        <span class="err-word" data-err-id="3">después</span> de una hora, Elena decide 
-        <span class="err-word" data-err-id="4">quedar</span> en el centro e ir a 
-        <span class="err-word" data-err-id="5">tomar</span> un vaso de agua mientras la espera. 
+        <span class="err-word" data-err-key="del">del</span> colegio porque el coche no funcionaba, así que ella ha tenido que 
+        <span class="err-word" data-err-key="buscar">buscar</span> a los niños a pie. Como tiene una reunión online 
+        <span class="err-word" data-err-key="después">después</span> de una hora, Elena decide 
+        <span class="err-word" data-err-key="quedar">quedar</span> en el centro e ir a 
+        <span class="err-word" data-err-key="tomar">tomar</span> un vaso de agua mientras la espera. 
         Más tarde, cuando se ven en la cafetería, Elena le cuenta que ha visto a una chica que 
-        <span class="err-word" data-err-id="6">parece</span> a la hermana de Marta. Por su parte, Marta le confiesa que en la reunión casi se ríe en la cara de su jefe cuando un cliente se ha puesto a cantar. 
+        <span class="err-word" data-err-key="parece">parece</span> a la hermana de Marta. Por su parte, Marta le confiesa que en la reunión casi se ríe en la cara de su jefe cuando un cliente se ha puesto a cantar. 
         Al salir del bar, entran a una tienda, pero a Marta no le gusta un jersey porque dice que no le 
-        <span class="err-word" data-err-id="7">cubre</span> bien la espalda y el color no le queda a su tono de piel. Al final, las dos 
-        <span class="err-word" data-err-id="8">se quedan</span> para cenar el sábado si Marta puede, y se despiden rápidamente porque Marta tiene que llevar a los niños del taller extraescolar dentro de comer.
+        <span class="err-word" data-err-key="cubre">cubre</span> bien la espalda y el color no le queda a su tono de piel. Al final, las dos 
+        <span class="err-word" data-err-key="se quedan">se quedan</span> para cenar el sábado si Marta puede, y se despiden rápidamente porque Marta tiene que llevar a los niños del taller extraescolar dentro de comer.
     </div>
 
     <!-- КОНТЕЙНЕР ДЛЯ ПОЛЕЙ ВВОДА -->
@@ -256,80 +262,132 @@
     </div>
 
     <script>
-        const errorsKey = {
-            "1": {
-                bad: "del",
+        const officialErrors = {
+            "del": {
                 correct: ["al"],
                 explain: "Llevar a alguien AL colegio (Dirección hacia el colegio, no procedencia)."
             },
-            "2": {
-                bad: "buscar",
+            "buscar": {
                 correct: ["llevar", "ir a llevar"],
                 explain: "Llevar a los niños (Va de camino hacia el colegio, no a recogerlos)."
             },
-            "3": {
-                bad: "después",
+            "después": {
                 correct: ["dentro"],
                 explain: "Dentro de una hora (Futuro contado desde el momento presente)."
             },
-            "4": {
-                bad: "quedar",
+            "quedar": {
                 correct: ["quedarse"],
                 explain: "Quedarse en el centro (Permanecer en un sitio exige verbo reflexivo)."
             },
-            "5": {
-                bad: "tomar",
+            "tomar": {
                 correct: ["beber"],
                 explain: "Beber un vaso de agua (En España el agua se bebe, 'tomar agua' suena a calca)."
             },
-            "6": {
-                bad: "parece",
+            "parece": {
                 correct: ["se parece", "se parecía"],
                 explain: "Se parece a (Semejanza física exige la forma reflexiva + preposición A)."
             },
-            "7": {
-                bad: "cubre",
+            "cubre": {
                 correct: ["tapa"],
                 explain: "No le tapa la espalda (Uso natural de ropa en el diálogo: 'no me cubre/tapa')."
             },
-            "8": {
-                bad: "se quedan",
+            "se quedan": {
                 correct: ["quedan"],
                 explain: "Quedan para cenar (Acordar una cita o plan es el verbo 'quedar' sin pronombre)."
             }
         };
 
-        const selectedErrors = new Set();
+        const activeWordsMap = new Map(); // tokenIndex -> { el, wordText, errKey }
 
-        // Вешаем слушатели кликов на все слова в тексте
-        document.querySelectorAll('#errTextBox .err-word').forEach(wordEl => {
-            wordEl.addEventListener('click', function() {
-                const errId = this.getAttribute('data-err-id');
-                
-                if (selectedErrors.has(errId)) {
-                    selectedErrors.delete(errId);
-                    this.classList.remove('selected');
-                    removeCorrectionCard(errId);
-                } else {
-                    selectedErrors.add(errId);
-                    this.classList.add('selected');
-                    addCorrectionCard(errId, this.innerText.trim());
+        // При старте оборачиваем ВСЕ слова текста в span.err-word
+        (function prepareInteractiveText() {
+            const textBox = document.getElementById('errTextBox');
+            const originalHTML = textBox.innerHTML;
+            
+            // Заменяем заранее определенные словосочетания-ошибки
+            let processed = originalHTML.replace('<span class="err-word" data-err-key="se quedan">se quedan</span>', '___SE_QUEDAN___');
+
+            const textNodes = [];
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = processed;
+
+            function extractWords(node) {
+                if (node.nodeType === 3) { // Text node
+                    const text = node.nodeValue;
+                    const tokens = text.split(/(\s+|___SE_QUEDAN___)/);
+                    const frag = document.createDocumentFragment();
+
+                    tokens.forEach(tok => {
+                        if (tok === '___SE_QUEDAN___') {
+                            const span = document.createElement('span');
+                            span.className = 'err-word';
+                            span.setAttribute('data-err-key', 'se quedan');
+                            span.innerText = 'se quedan';
+                            frag.appendChild(span);
+                        } else if (tok.trim().length > 0) {
+                            const span = document.createElement('span');
+                            span.className = 'err-word';
+                            
+                            // Проверяем, является ли слово одной из ошибок
+                            const cleanTok = tok.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+                            if (officialErrors[cleanTok]) {
+                                span.setAttribute('data-err-key', cleanTok);
+                            }
+
+                            span.innerText = tok;
+                            frag.appendChild(span);
+                        } else {
+                            frag.appendChild(document.createTextNode(tok));
+                        }
+                    });
+
+                    node.parentNode.replaceChild(frag, node);
+                } else if (node.nodeType === 1) {
+                    Array.from(node.childNodes).forEach(extractWords);
                 }
+            }
 
-                toggleEmptyMsg();
+            extractWords(tempDiv);
+            textBox.innerHTML = tempDiv.innerHTML;
+
+            // Вешаем клик на абсолютно каждый элемент .err-word
+            document.querySelectorAll('#errTextBox .err-word').forEach((el, idx) => {
+                el.setAttribute('data-word-id', idx);
+                el.addEventListener('click', function() {
+                    handleWordClick(this, idx);
+                });
             });
-        });
+        })();
+
+        function handleWordClick(element, wordId) {
+            const wordText = element.innerText.trim();
+            const errKey = element.getAttribute('data-err-key') || null;
+
+            if (activeWordsMap.has(wordId)) {
+                // Снимаем выделение
+                activeWordsMap.delete(wordId);
+                element.className = 'err-word';
+                removeCorrectionCard(wordId);
+            } else {
+                // Выделяем слово
+                activeWordsMap.set(wordId, { element, wordText, errKey });
+                element.classList.add('selected');
+                addCorrectionCard(wordId, wordText, errKey);
+            }
+
+            toggleEmptyMsg();
+        }
 
         function toggleEmptyMsg() {
             const emptyMsg = document.getElementById('errEmptyMsg');
-            if (selectedErrors.size === 0) {
+            if (activeWordsMap.size === 0) {
                 emptyMsg.style.display = 'block';
             } else {
                 emptyMsg.style.display = 'none';
             }
         }
 
-        function addCorrectionCard(id, badWordText) {
+        function addCorrectionCard(id, badWordText, errKey) {
             const container = document.getElementById('errCorrectionsBox');
 
             const card = document.createElement('div');
@@ -338,11 +396,11 @@
             card.innerHTML = `
                 <div class="err-card-header">
                     <span>Palabra seleccionada: <span class="err-bad-text">${badWordText}</span></span>
-                    <span style="font-size:0.8rem; color:#64748b; cursor:pointer;" onclick="deselectWord('${id}')">❌ quitar</span>
+                    <span style="font-size:0.8rem; color:#64748b; cursor:pointer;" onclick="deselectWord(${id})">❌ quitar</span>
                 </div>
                 <div class="err-inputs-grid">
-                    <input class="err-input" id="errInpCorr_${id}" placeholder="Tu corrección (ej: al, quedarse)..." autocomplete="off">
-                    <input class="err-input" id="errInpExpl_${id}" placeholder="Explicación de por qué estaba mal..." autocomplete="off">
+                    <input class="err-input" id="errInpCorr_${id}" placeholder="Tu corrección..." autocomplete="off">
+                    <input class="err-input" id="errInpExpl_${id}" placeholder="Explicación de por qué está mal..." autocomplete="off">
                 </div>
                 <div class="err-expl-feedback" id="errFb_${id}"></div>
             `;
@@ -355,9 +413,11 @@
         }
 
         function deselectWord(id) {
-            selectedErrors.delete(id);
-            const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
-            if (wordEl) wordEl.classList.remove('selected');
+            const item = activeWordsMap.get(id);
+            if (item) {
+                item.element.className = 'err-word';
+                activeWordsMap.delete(id);
+            }
             removeCorrectionCard(id);
             toggleEmptyMsg();
         }
@@ -365,18 +425,19 @@
         function checkErrAnswers() {
             let correctFoundCount = 0;
 
-            selectedErrors.forEach(id => {
-                const key = errorsKey[id];
-                const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
+            activeWordsMap.forEach((item, id) => {
+                const errKey = item.errKey;
                 const inpCorr = document.getElementById('errInpCorr_' + id);
                 const fb = document.getElementById('errFb_' + id);
 
-                if (key) {
-                    // Это действительно ошибка
-                    wordEl.classList.remove('selected');
-                    wordEl.classList.add('correct-found');
+                item.element.classList.remove('selected', 'correct-found', 'false-alarm');
+
+                if (errKey && officialErrors[errKey]) {
+                    // Это настоящая ошибка
+                    item.element.classList.add('correct-found');
                     correctFoundCount++;
 
+                    const key = officialErrors[errKey];
                     const userVal = inpCorr.value.trim().toLowerCase();
                     const isCorrRight = key.correct.some(c => c.toLowerCase() === userVal);
 
@@ -386,49 +447,55 @@
 
                     fb.innerHTML = `💡 <b>Clave oficial:</b> ${key.correct.join(' / ')}<br><i>${key.explain}</i>`;
                     fb.style.display = 'block';
+                } else {
+                    // Слово выделено ошибочно (ложжная тревога)
+                    item.element.classList.add('false-alarm');
+                    fb.innerHTML = `ℹ️ Esta palabra era correcta en el texto original.`;
+                    fb.style.display = 'block';
                 }
             });
 
             const scoreBox = document.getElementById('errScoreBox');
-            scoreBox.innerHTML = `📊 Detectaste <b>${correctFoundCount}</b> de 8 errores reales en el texto!`;
+            scoreBox.innerHTML = `📊 Encontraste <b>${correctFoundCount}</b> de las 8 errores reales del texto!`;
             scoreBox.style.display = 'block';
         }
 
         function showErrAnswers() {
-            // Выделяем все 8 ошибок
-            for (let id = 1; id <= 8; id++) {
-                const wordEl = document.querySelector(`.err-word[data-err-id="${id}"]`);
-                if (!selectedErrors.has(String(id))) {
-                    selectedErrors.add(String(id));
-                    addCorrectionCard(String(id), wordEl.innerText.trim());
-                }
-                wordEl.classList.remove('selected');
-                wordEl.classList.add('correct-found');
+            // Сбрасываем текущие выборки
+            resetErrActivity();
 
-                const key = errorsKey[id];
-                const inpCorr = document.getElementById('errInpCorr_' + id);
-                const fb = document.getElementById('errFb_' + id);
+            let foundIdx = 0;
+            document.querySelectorAll('#errTextBox .err-word').forEach((el, idx) => {
+                const errKey = el.getAttribute('data-err-key');
+                if (errKey && officialErrors[errKey]) {
+                    el.classList.add('correct-found');
+                    activeWordsMap.set(idx, { element: el, wordText: el.innerText.trim(), errKey });
+                    addCorrectionCard(idx, el.innerText.trim(), errKey);
 
-                if (inpCorr) {
-                    inpCorr.value = key.correct[0];
-                    inpCorr.classList.add('correct');
-                }
+                    const key = officialErrors[errKey];
+                    const inpCorr = document.getElementById('errInpCorr_' + idx);
+                    const fb = document.getElementById('errFb_' + idx);
 
-                if (fb) {
-                    fb.innerHTML = `💡 <b>Clave oficial:</b> ${key.correct.join(' / ')}<br><i>${key.explain}</i>`;
-                    fb.style.display = 'block';
+                    if (inpCorr) {
+                        inpCorr.value = key.correct[0];
+                        inpCorr.classList.add('correct');
+                    }
+                    if (fb) {
+                        fb.innerHTML = `💡 <b>Clave oficial:</b> ${key.correct.join(' / ')}<br><i>${key.explain}</i>`;
+                        fb.style.display = 'block';
+                    }
                 }
-            }
+            });
 
             toggleEmptyMsg();
 
             const scoreBox = document.getElementById('errScoreBox');
-            scoreBox.innerText = '🔑 Se han marcado los 8 errores con sus correcciones y explicaciones oficiales.';
+            scoreBox.innerText = '🔑 Se han localizado y corregido los 8 errores reales del texto.';
             scoreBox.style.display = 'block';
         }
 
         function resetErrActivity() {
-            selectedErrors.clear();
+            activeWordsMap.clear();
 
             document.querySelectorAll('#errTextBox .err-word').forEach(el => {
                 el.className = 'err-word';
