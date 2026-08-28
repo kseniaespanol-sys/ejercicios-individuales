@@ -1,0 +1,339 @@
+<div class="ex-isolation" id="hover-dialogues-b1-2026">
+    <style>
+        #hover-dialogues-b1-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 980px;
+            margin: 20px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.06);
+            color: #2c3e50;
+        }
+
+        #hover-dialogues-b1-2026 h2 { 
+            color: #45188c; 
+            text-align: center; 
+            margin-bottom: 6px; 
+            text-transform: uppercase; 
+            font-size: 1.35rem; 
+            font-weight: 800; 
+        }
+
+        #hover-dialogues-b1-2026 .hov-instruction { 
+            text-align: center; 
+            color: #64748b; 
+            font-style: italic; 
+            margin-bottom: 25px; 
+            font-size: 1rem; 
+        }
+
+        /* Навигация по диалогам */
+        .hov-dialogue-section {
+            background: #fdfbff;
+            border: 1px solid #e9d5ff;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .hov-dialogue-title {
+            font-weight: 800;
+            color: #45188c;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            border-bottom: 2px solid #f1f0ff;
+            padding-bottom: 8px;
+        }
+
+        .hov-context {
+            font-size: 0.92rem;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 20px;
+            background: #f4f0ff;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        /* Строки диалога */
+        .hov-line {
+            font-size: 1.15rem;
+            line-height: 2.7;
+            margin-bottom: 14px;
+            color: #334155;
+            text-align: justify;
+        }
+
+        .hov-speaker {
+            font-weight: 800;
+            color: #45188c;
+            margin-right: 8px;
+            display: inline-block;
+        }
+
+        /* Элемент с всплывающим переводом */
+        .w {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 6px;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px dotted #cbd5e1;
+        }
+
+        .w:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* Разговорные выражения, идиомы и чанки */
+        .w.chunk {
+            background: #f3e8ff;
+            color: #6b21a8;
+            font-weight: 700;
+            border-bottom: 2px solid #a855f7;
+        }
+
+        .w.chunk:hover {
+            background: #d8b4fe;
+            color: #3b0764;
+        }
+
+        /* Всплывающий перевод */
+        .w .t {
+            visibility: hidden;
+            opacity: 0;
+            width: max-content;
+            max-width: 260px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            text-align: center;
+            border-radius: 8px;
+            padding: 6px 12px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%; 
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.88rem;
+            font-weight: 500;
+            line-height: 1.3;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+
+        .w .t::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+
+        .w:hover .t {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+        @media (max-width: 600px) {
+            #hover-dialogues-b1-2026 { padding: 20px 15px; }
+            .hov-dialogue-section { padding: 18px; }
+            .hov-line { font-size: 1.02rem; line-height: 2.5; text-align: left; }
+            .w .t { font-size: 0.8rem; max-width: 200px; }
+        }
+    </style>
+
+    <h2>🗣️ Diálogos Nivel B1: Rutina, Imprevistos y Planes</h2>
+    <div class="hov-instruction">Instrucción: Наводи мышкой на фразы, разговорные выражения и идиомы, чтобы увидеть их контекстный перевод.</div>
+
+    <div class="hov-dialogue-section">
+        <div class="hov-dialogue-title">📞 Diálogo 1: La logística familiar y las prisas de la mañana</div>
+        <div class="hov-context">Contexto: Marta llama a su amiga Elena mientras intenta resolver la rutina de los niños y sus compromisos del día.</div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">¡Hola, Marta!<span class="t">Привет, Марта!</span></span>
+            <span class="w">¿Cómo vas?<span class="t">Как дела? / Как успехи?</span></span>
+            <span class="w">¿Nos vemos hoy<span class="t">Увидимся сегодня,</span></span>
+            <span class="w">para tomar un café?<span class="t">чтобы выпить кофе?</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w chunk">¡Ojalá!<span class="t">Эх, если бы! / Хотелось бы!</span></span>
+            <span class="w chunk">Pero voy de cabeza.<span class="t">Но я завалена делами / кручусь как белка в колесе.</span></span>
+            <span class="w">Hoy mi marido<span class="t">Сегодня мой муж</span></span>
+            <span class="w">no pudo llevar<span class="t">не смог отвезти (Indefinido)</span></span>
+            <span class="w">a los niños al colegio<span class="t">детей в школу,</span></span>
+            <span class="w">porque el coche<span class="t">потому что машина</span></span>
+            <span class="w">no arrancaba,<span class="t">не заводилась (Imperfecto),</span></span>
+            <span class="w chunk">así que me puse las botas<span class="t">так что я засучила рукава / взялась за дело</span></span>
+            <span class="w">y los llevé yo andando.<span class="t">и повела их пешком.</span></span>
+            <span class="w">Y claro,<span class="t">И конечно,</span></span>
+            <span class="w chunk">para colmo,<span class="t">вдобавок / ко всему прочему,</span></span>
+            <span class="w">hoy me toca a mí<span class="t">сегодня моя очередь (Presente)</span></span>
+            <span class="w">ir a buscar a los niños<span class="t">идти забирать детей</span></span>
+            <span class="w">a la salida.<span class="t">после уроков / на выходе.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w chunk">Vaya plan...<span class="t">Ну и денёк... / Вот это расклад...</span></span>
+            <span class="w">¿Y a qué hora salen?<span class="t">И во сколько они заканчивают?</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">A las cinco.<span class="t">В пять.</span></span>
+            <span class="w">Pero dentro de una hora<span class="t">Но через час</span></span>
+            <span class="w">tengo una reunión online<span class="t">у меня онлайн-встреча</span></span>
+            <span class="w">con el equipo nuevo.<span class="t">с новой командой.</span></span>
+            <span class="w chunk">A ver qué tal,<span class="t">Посмотрим, как всё пройдет,</span></span>
+            <span class="w">porque la verdad es que<span class="t">потому что, честно говоря,</span></span>
+            <span class="w">este trabajo<span class="t">эта работа</span></span>
+            <span class="w">no me encaja mucho<span class="t">не очень подходит / не вписывается</span></span>
+            <span class="w">con mi vida actual,<span class="t">в мою текущую жизнь,</span></span>
+            <span class="w">pero bueno...<span class="t">ну да ладно...</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">Tranquila.<span class="t">Успокойся / Не переживай.</span></span>
+            <span class="w">Si quieres,<span class="t">Если хочешь,</span></span>
+            <span class="w">nos vemos después<span class="t">увидимся после</span></span>
+            <span class="w">de tu reunión.<span class="t">твоего совещания.</span></span>
+            <span class="w">Yo me quedo por el centro<span class="t">Я останусь в центре</span></span>
+            <span class="w chunk">haciendo unos recados<span class="t">бегая по делам / выполняя поручения</span></span>
+            <span class="w">y te espero.<span class="t">и подожду тебя.</span></span>
+        </div>
+    </div>
+
+    <div class="hov-dialogue-section">
+        <div class="hov-dialogue-title">☕ Diálogo 2: El café, las apariencias y las anécdotas</div>
+        <div class="hov-context">Contexto: Se encuentran finalmente dos horas más tarde en una cafetería.</div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">¡Uf, qué paz!<span class="t">Уф, какой покой!</span></span>
+            <span class="w">Necesitaba beber<span class="t">Мне нужно было выпить</span></span>
+            <span class="w">un vaso de agua<span class="t">стакан воды,</span></span>
+            <span class="w">antes de pedir nada.<span class="t">прежде чем что-то заказывать.</span></span>
+            <span class="w chunk">Vengo sofocada.<span class="t">Я прибежала совсем запыхавшейся.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">Se nota,<span class="t">Это заметно,</span></span>
+            <span class="w chunk">traes una cara...<span class="t">на тебе лица нет... / у тебя такой вид...</span></span>
+            <span class="w">Oye, ¿sabes a quién vi antes<span class="t">Слушай, знаешь, кого я видела раньше</span></span>
+            <span class="w">cerca del colegio?<span class="t">около школы?</span></span>
+            <span class="w">A tu hermana.<span class="t">Твою сестру.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">¿A Lucía?<span class="t">Люсию?</span></span>
+            <span class="w">Imposible,<span class="t">Невозможно,</span></span>
+            <span class="w">ella vive en Valencia.<span class="t">она живет в Валенсии.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">Pues vi a una chica<span class="t">Ну, я увидела девушку,</span></span>
+            <span class="w">que se parecía muchísimo<span class="t">которая была очень похожа (Imperfecto)</span></span>
+            <span class="w">a ella.<span class="t">на неё.</span></span>
+            <span class="w">Hasta llevaba<span class="t">Даже носила / была в (Imperfecto)</span></span>
+            <span class="w">el mismo abrigo.<span class="t">таком же пальто.</span></span>
+            <span class="w">Parecía que iba a entrar<span class="t">Казалось, она собиралась войти</span></span>
+            <span class="w">a la tienda de ropa,<span class="t">в магазин одежды,</span></span>
+            <span class="w">pero al final no.<span class="t">но в итоге нет.</span></span>
+            <span class="w chunk">Por cierto,<span class="t">Кстати,</span></span>
+            <span class="w">¿qué tal la reunión?<span class="t">как прошла встреча?</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">Regular.<span class="t">Так себе / Средненько.</span></span>
+            <span class="w">Dijeron un par de tonterías<span class="t">Сказали пару глупостей (Indefinido)</span></span>
+            <span class="w">y casi me río<span class="t">и я чуть не рассмеялась</span></span>
+            <span class="w chunk">en la cara del jefe.<span class="t">прямо в лицо боссу.</span></span>
+            <span class="w">Tuve que disimular.<span class="t">Мне пришлось сделать вид / притвориться.</span></span>
+            <span class="w">La verdad es que<span class="t">Честно говоря,</span></span>
+            <span class="w chunk">no me pude aguantar la risa<span class="t">я не смогла сдержать смех</span></span>
+            <span class="w">cuando el cliente<span class="t">когда клиент</span></span>
+            <span class="w">se puso a cantar<span class="t">начал петь (Indefinido)</span></span>
+            <span class="w">sin querer<span class="t">нечаянно / случайно</span></span>
+            <span class="w">porque olvidó apagar<span class="t">потому что забыл выключить (Indefinido)</span></span>
+            <span class="w">el micrófono.<span class="t">микрофон.</span></span>
+            <span class="w">¡Nos reímos todos un montón!<span class="t">Мы все ужасно посмеялись!</span></span>
+        </div>
+    </div>
+
+    <div class="hov-dialogue-section">
+        <div class="hov-dialogue-title">🛍️ Diálogo 3: Compras, ropa y planes de fin de semana</div>
+        <div class="hov-context">Contexto: Salen de la cafetería y entran a una tienda rápida antes de que Marta tenga que volver a por los niños.</div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">Mira este jersey, Marta.<span class="t">Посмотри на этот свитер, Марта.</span></span>
+            <span class="w">¿Por qué no te lo pruebas?<span class="t">Почему бы тебе его не примерить?</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">Um, no sé.<span class="t">Хм, не знаю.</span></span>
+            <span class="w">No me cubre bien la espalda,<span class="t">Он не закрывает мне хорошо спину,</span></span>
+            <span class="w">es demasiado corto<span class="t">он слишком короткий</span></span>
+            <span class="w">para el frío que hace.<span class="t">для такой холодной погоды.</span></span>
+            <span class="w">Además,<span class="t">Кроме того,</span></span>
+            <span class="w">ese color verde<span class="t">этот зелёный цвет</span></span>
+            <span class="w chunk">no me queda nada bien.<span class="t">мне совсем не идёт.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w">Tienes razón,<span class="t">Ты права,</span></span>
+            <span class="w chunk">a ti te van mejor<span class="t">тебе больше идут</span></span>
+            <span class="w">los tonos cálidos.<span class="t">тёплые тона.</span></span>
+            <span class="w">Bueno, ¿entonces quedamos<span class="t">Ну что, тогда договариваемся встретиться</span></span>
+            <span class="w">el sábado para cenar<span class="t">в субботу поужинать</span></span>
+            <span class="w">con los demás?<span class="t">с остальными?</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Marta:</span>
+            <span class="w">No sé si podré.<span class="t">Не знаю, смогу ли.</span></span>
+            <span class="w">A ver cómo se presenta<span class="t">Посмотрим, как сложится / выдастся</span></span>
+            <span class="w">el fin de semana,<span class="t">уикенд,</span></span>
+            <span class="w chunk">pero si no surge nada raro,<span class="t">но если не возникнет ничего странного / непредвиденного,</span></span>
+            <span class="w chunk">cuento con ello.<span class="t">я в деле / рассчитывайте на меня.</span></span>
+            <span class="w">Oye,<span class="t">Слушай,</span></span>
+            <span class="w chunk">me tengo que ir volando,<span class="t">мне нужно лететь / мчаться,</span></span>
+            <span class="w">que dentro de diez minutos<span class="t">потому что через десять минут</span></span>
+            <span class="w">entran los niños<span class="t">дети заходят</span></span>
+            <span class="w">al taller extraescolar<span class="t">на внеклассный кружок / секцию</span></span>
+            <span class="w">y los tengo que llevar<span class="t">и я должна их отвести</span></span>
+            <span class="w">antes de que cierren la puerta.<span class="t">прежде чем закроют дверь.</span></span>
+        </div>
+
+        <div class="hov-line">
+            <span class="hov-speaker">Elena:</span>
+            <span class="w chunk">¡Dale!<span class="t">Давай! / Договорились!</span></span>
+            <span class="w">Luego me cuentas<span class="t">Потом расскажешь мне,</span></span>
+            <span class="w">qué tal te quedó<span class="t">как у тебя получилась</span></span>
+            <span class="w">la comida de mañana.<span class="t">завтрашняя еда.</span></span>
+            <span class="w">¡Un beso!<span class="t">Целую!</span></span>
+        </div>
+    </div>
+
+</div>
