@@ -1,0 +1,674 @@
+<div class="ex-isolation" id="combo-emociones-b1-part6-2026">
+    <style>
+        #combo-emociones-b1-part6-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 980px;
+            margin: 25px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.08);
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        #combo-emociones-b1-part6-2026 *,
+        #combo-emociones-b1-part6-2026 *::before,
+        #combo-emociones-b1-part6-2026 *::after {
+            box-sizing: border-box;
+        }
+
+        #combo-emociones-b1-part6-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 2.1rem;
+            font-weight: 800;
+        }
+
+        .emo-instruction {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.25rem;
+            line-height: 1.55;
+        }
+
+        .emo-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .emo-row-card {
+            background: #fdfbff;
+            border: 2px solid #e9d5ff;
+            border-radius: 18px;
+            padding: 22px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(69, 24, 140, 0.03);
+        }
+
+        .emo-row-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.1);
+        }
+
+        .emo-target-phrase {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #45188c;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .emo-target-tag {
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            background: #ede9fe;
+            color: #6d28d9;
+            text-transform: uppercase;
+        }
+
+        .emo-selects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr 1.1fr;
+            gap: 14px;
+        }
+
+        .emo-select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .emo-select-label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .emo-select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            font-size: 1.05rem;
+            color: #1e293b;
+            background: #ffffff;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .emo-select:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .emo-select.is-correct {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+            color: #15803d !important;
+            font-weight: 700;
+        }
+
+        .emo-select.is-wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+
+        .emo-feedback-box {
+            display: none;
+            margin-top: 14px;
+            padding: 14px 18px;
+            background: #f8fafc;
+            border-left: 4px solid #8b5cf6;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .emo-feedback-box b {
+            color: #45188c;
+        }
+
+        .emo-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .emo-ctrl-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .emo-btn-check { background: #8b5cf6; color: #ffffff; }
+        .emo-btn-check:hover { background: #7c3aed; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3); }
+
+        .emo-btn-show { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .emo-btn-show:hover { background: #e2e8f0; }
+
+        .emo-btn-reset { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+        .emo-btn-reset:hover { background: #ffe4e6; }
+
+        #emoScoreBox6 {
+            display: none;
+            margin-top: 30px;
+            padding: 26px;
+            border-radius: 18px;
+            background: #fdfbff;
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #45188c;
+        }
+
+        @media (max-width: 800px) {
+            #combo-emociones-b1-part6-2026 { padding: 22px 14px; }
+            .emo-selects-grid { grid-template-columns: 1fr; }
+            .emo-target-phrase { font-size: 1.35rem; flex-wrap: wrap; }
+            .emo-ctrl-btn { width: 100%; text-align: center; font-size: 1.1rem; }
+            .emo-select { font-size: 1rem; }
+        }
+    </style>
+
+    <h2>🎭 Mapa de emociones: Parte 6 (8 expresiones clave)</h2>
+    <div class="emo-instruction">
+        <b>Instrucciones:</b> Para cada término o fórmula selecciona: <b>1) Grupo emocional</b>, <b>2) Definición exacta en español</b> y <b>3) Registro de habla</b>.
+    </div>
+
+    <div class="emo-cards-container" id="emoCardsContainer6">
+        <!-- 1. La rabia -->
+        <div class="emo-row-card" data-idx="1" data-cat="ira" data-def="def_rabia" data-reg="estandar">
+            <div class="emo-target-phrase">
+                <span>1. La rabia</span>
+                <span class="emo-target-tag">Nombre de emoción</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_rabia">Sentimiento de enfado o irritación muy intensa ante un obstáculo.</option>
+                        <option value="def_bajon_d">Caída repentina del ánimo o energía.</option>
+                        <option value="def_alivio_d">Mitigación o cese de una carga o preocupación.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="estandar">Estándar</option>
+                        <option value="vulgar">Vulgar</option>
+                        <option value="juvenil">Muy coloquial / Juvenil</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_1">
+                💡 <b>Clave:</b> <i>La rabia</i> pertenece a <b>Ira y enfado</b>. Su registro es <b>Estándar</b> (muy habitual tanto en lengua culta como cotidiana: «me da mucha rabia»).
+            </div>
+        </div>
+
+        <!-- 2. Es que... -->
+        <div class="emo-row-card" data-idx="2" data-cat="ira" data-def="def_esque" data-reg="coloquial_estandar">
+            <div class="emo-target-phrase">
+                <span>2. Es que...</span>
+                <span class="emo-target-tag">Conector / Justificación</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_esque">Justificación o excusa introductoria ante un problema o reclamo.</option>
+                        <option value="def_relativiza_d">Conector conclusivo para relativizar un hecho.</option>
+                        <option value="def_rechazo_d">Rechazo tajante a realizar algo.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="coloquial_estandar">Coloquial / Estándar</option>
+                        <option value="formal_estricto">Formal administrativo</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_2">
+                💡 <b>Clave:</b> En situaciones de <b>Ira / Justificación</b> sirve para defenderse o introducir un motivo atenuante («¿Por qué no viniste? —Es que se me rompió el coche»). Registro <b>Coloquial / Estándar</b>.
+            </div>
+        </div>
+
+        <!-- 3. La verdad es que... -->
+        <div class="emo-row-card" data-idx="3" data-cat="decepcion" data-def="def_laverdad" data-reg="estandar_neutro">
+            <div class="emo-target-phrase">
+                <span>3. La verdad es que...</span>
+                <span class="emo-target-tag">Conector / Matiz</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_laverdad">Introduce una valoración sincera, a menudo matizando una decepción o realidad.</option>
+                        <option value="def_limite_d">Indica que una situación ha llegado a su límite.</option>
+                        <option value="def_aprobacion_d">Aclamación festiva y aplauso.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="estandar_neutro">Estándar / Neutro</option>
+                        <option value="vulgar">Vulgar</option>
+                        <option value="juvenil">Muy coloquial / Juvenil</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_3">
+                💡 <b>Clave:</b> En este marco se asocia a <b>Decepción y franqueza</b> («La verdad es que esperaba algo mejor de su parte»). Registro <b>Estándar / Neutro</b>.
+            </div>
+        </div>
+
+        <!-- 4. O sea... -->
+        <div class="emo-row-card" data-idx="4" data-cat="verguenza" data-def="def_osea" data-reg="coloquial">
+            <div class="emo-target-phrase">
+                <span>4. O sea...</span>
+                <span class="emo-target-tag">Conector / Muletilla</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_osea">Muletilla explicativa para reformular o aclarar una idea ante un apuro.</option>
+                        <option value="def_estupor_d">Estado de estupor ante un choque repentino.</option>
+                        <option value="def_alivio_sol">Alivio y satisfacción por una solución.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="formal">Estándar / Formal</option>
+                        <option value="coloquial">Coloquial</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_4">
+                💡 <b>Clave:</b> En momentos de <b>Vergüenza o titubeo</b> funciona como muletilla reformuladora («No sé si me explico, o sea, no quise ofenderte»). Registro <b>Coloquial</b>.
+            </div>
+        </div>
+
+        <!-- 5. El asombro -->
+        <div class="emo-row-card" data-idx="5" data-cat="sorpresa" data-def="def_asombro" data-reg="estandar">
+            <div class="emo-target-phrase">
+                <span>5. El asombro</span>
+                <span class="emo-target-tag">Nombre de emoción</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_asombro">Sensación viva provocada por algo imprevisto, extraordinario o inesperado.</option>
+                        <option value="def_repugnancia_d">Rechazo intenso hacia algo o alguien.</option>
+                        <option value="def_disculpa_d">Expresión de remordimiento y culpa.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="estandar">Estándar</option>
+                        <option value="coloquial_jerga">Coloquial / Jerga</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_5">
+                💡 <b>Clave:</b> Sustantivo propio de <b>Sorpresa y asombro</b>. Registro <b>Estándar</b>.
+            </div>
+        </div>
+
+        <!-- 6. Pero vamos a ver... -->
+        <div class="emo-row-card" data-idx="6" data-cat="sorpresa" data-def="def_vamosaver" data-reg="coloquial">
+            <div class="emo-target-phrase">
+                <span>6. Pero vamos a ver...</span>
+                <span class="emo-target-tag">Conector / Marcador discursivo</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_vamosaver">Llamada de atención para exigir lógica o claridad ante algo confuso o chocante.</option>
+                        <option value="def_aprobacion_f">Fórmula de aprobación festiva y aplauso.</option>
+                        <option value="def_desaparecer">Deseo figurado de desaparecer por vergüenza.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="formal">Estándar / Formal</option>
+                        <option value="coloquial">Coloquial</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_6">
+                💡 <b>Clave:</b> Ubicado en <b>Sorpresa e incredulidad</b> («Pero vamos a ver... ¿cómo que cancelaron el vuelo si ya embarcamos?»). Registro <b>Coloquial</b>.
+            </div>
+        </div>
+
+        <!-- 7. Menos mal que... -->
+        <div class="emo-row-card" data-idx="7" data-cat="alegria" data-def="def_menosmalque" data-reg="coloquial_estandar">
+            <div class="emo-target-phrase">
+                <span>7. Menos mal que...</span>
+                <span class="emo-target-tag">Conector / Alivio-Alegría</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_menosmalque">Conector para denotar alivio y satisfacción por una solución afortunada.</option>
+                        <option value="def_desengaño_d">Pesar o desengaño causado por una sorpresa negativa.</option>
+                        <option value="def_rechazo_d2">Rechazo violento ante una conducta intolerable.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="coloquial_estandar">Coloquial / Estándar</option>
+                        <option value="formal_estricto">Formal administrativo</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_7">
+                💡 <b>Clave:</b> En el nexo entre <b>Alegría y Alivio</b> («Menos mal que guardamos copia de seguridad antes de que se apagara»). Registro <b>Coloquial / Estándar</b>.
+            </div>
+        </div>
+
+        <!-- 8. Bueno, claro... -->
+        <div class="emo-row-card" data-idx="8" data-cat="alivio" data-def="def_buenoclaro" data-reg="coloquial">
+            <div class="emo-target-phrase">
+                <span>8. Bueno, claro...</span>
+                <span class="emo-target-tag">Conector / Empatía</span>
+            </div>
+            <div class="emo-selects-grid">
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Grupo emocional:</span>
+                    <select class="emo-select sel-cat">
+                        <option value="">-- Elige emoción --</option>
+                        <option value="ira">Ira, indignación y enfado</option>
+                        <option value="decepcion">Decepción y tristeza</option>
+                        <option value="verguenza">Vergüenza, incomodidad y culpa</option>
+                        <option value="asco">Asco y repulsión</option>
+                        <option value="sorpresa">Sorpresa, asombro y shock</option>
+                        <option value="alegria">Alegría y euforia</option>
+                        <option value="alivio">Alivio y empatía</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Definición en español:</span>
+                    <select class="emo-select sel-def">
+                        <option value="">-- Elige definición --</option>
+                        <option value="def_buenoclaro">Matización empática o aceptación pragmática de la perspectiva ajena.</option>
+                        <option value="def_limite_d2">Indica que una situación intolerable ha llegado a su fin.</option>
+                        <option value="def_pregunta_d">Pregunta retórica que expresa perplejidad y desacuerdo.</option>
+                    </select>
+                </div>
+                <div class="emo-select-group">
+                    <span class="emo-select-label">Registro de habla:</span>
+                    <select class="emo-select sel-reg">
+                        <option value="">-- Elige registro --</option>
+                        <option value="formal">Estándar / Formal</option>
+                        <option value="coloquial">Coloquial</option>
+                        <option value="vulgar">Vulgar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emo-feedback-box" id="p6_fb_8">
+                💡 <b>Clave:</b> <b>Alivio y empatía</b>. Frena la confrontación y valida el punto de vista del interlocutor («No pude avisarte antes. —Bueno, claro, entiendo que estabas liado»). Registro <b>Coloquial</b>.
+            </div>
+        </div>
+    </div>
+
+    <!-- КНОПКИ -->
+    <div class="emo-control-bar">
+        <button type="button" class="emo-ctrl-btn emo-btn-check" onclick="checkComboPart6()">✅ Comprobar</button>
+        <button type="button" class="emo-ctrl-btn emo-btn-show" onclick="showComboPart6()">👁️ Mostrar respuestas y explicaciones</button>
+        <button type="button" class="emo-ctrl-btn emo-btn-reset" onclick="resetComboPart6()">🔄 Reiniciar</button>
+    </div>
+
+    <!-- ВЫВОД БАЛЛОВ -->
+    <div id="emoScoreBox6"></div>
+
+    <script>
+        function checkComboPart6() {
+            const cards = document.querySelectorAll('#combo-emociones-b1-part6-2026 .emo-row-card');
+            const totalFields = cards.length * 3;
+            let correctFields = 0;
+
+            cards.forEach(card => {
+                const targetCat = card.getAttribute('data-cat');
+                const targetDef = card.getAttribute('data-def');
+                const targetReg = card.getAttribute('data-reg');
+
+                const selCat = card.querySelector('.sel-cat');
+                const selDef = card.querySelector('.sel-def');
+                const selReg = card.querySelector('.sel-reg');
+
+                if (selCat.value === targetCat) {
+                    selCat.className = 'emo-select sel-cat is-correct';
+                    correctFields++;
+                } else {
+                    selCat.className = 'emo-select sel-cat is-wrong';
+                }
+
+                if (selDef.value === targetDef) {
+                    selDef.className = 'emo-select sel-def is-correct';
+                    correctFields++;
+                } else {
+                    selDef.className = 'emo-select sel-def is-wrong';
+                }
+
+                if (selReg.value === targetReg) {
+                    selReg.className = 'emo-select sel-reg is-correct';
+                    correctFields++;
+                } else {
+                    selReg.className = 'emo-select sel-reg is-wrong';
+                }
+
+                const idx = card.getAttribute('data-idx');
+                const fb = document.getElementById('p6_fb_' + idx);
+                if (fb) fb.style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('emoScoreBox6');
+            scoreBox.innerHTML = `📊 Puntuación Parte 6: ${correctFields} de ${totalFields} parámetros correctos (${Math.round((correctFields/totalFields)*100)}%)`;
+            scoreBox.style.display = 'block';
+            scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showComboPart6() {
+            const cards = document.querySelectorAll('#combo-emociones-b1-part6-2026 .emo-row-card');
+            cards.forEach(card => {
+                const targetCat = card.getAttribute('data-cat');
+                const targetDef = card.getAttribute('data-def');
+                const targetReg = card.getAttribute('data-reg');
+
+                const selCat = card.querySelector('.sel-cat');
+                const selDef = card.querySelector('.sel-def');
+                const selReg = card.querySelector('.sel-reg');
+
+                selCat.value = targetCat;
+                selCat.className = 'emo-select sel-cat is-correct';
+
+                selDef.value = targetDef;
+                selDef.className = 'emo-select sel-def is-correct';
+
+                selReg.value = targetReg;
+                selReg.className = 'emo-select sel-reg is-correct';
+
+                const idx = card.getAttribute('data-idx');
+                const fb = document.getElementById('p6_fb_' + idx);
+                if (fb) fb.style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('emoScoreBox6');
+            scoreBox.innerHTML = `🔑 Claves pragmáticas y respuestas correctas desbloqueadas.`;
+            scoreBox.style.display = 'block';
+        }
+
+        function resetComboPart6() {
+            const cards = document.querySelectorAll('#combo-emociones-b1-part6-2026 .emo-row-card');
+            cards.forEach(card => {
+                const selCat = card.querySelector('.sel-cat');
+                const selDef = card.querySelector('.sel-def');
+                const selReg = card.querySelector('.sel-reg');
+
+                selCat.value = '';
+                selCat.className = 'emo-select sel-cat';
+
+                selDef.value = '';
+                selDef.className = 'emo-select sel-def';
+
+                selReg.value = '';
+                selReg.className = 'emo-select sel-reg';
+
+                const idx = card.getAttribute('data-idx');
+                const fb = document.getElementById('p6_fb_' + idx);
+                if (fb) fb.style.display = 'none';
+            });
+
+            const scoreBox = document.getElementById('emoScoreBox6');
+            scoreBox.style.display = 'none';
+            scoreBox.innerHTML = '';
+        }
+    </script>
+</div>
