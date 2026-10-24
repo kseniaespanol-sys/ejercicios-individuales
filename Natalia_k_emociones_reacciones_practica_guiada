@@ -1,0 +1,516 @@
+<div class="ex-isolation" id="guided-practice-b1-2026">
+    <style>
+        #guided-practice-b1-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 950px;
+            margin: 25px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.08);
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        #guided-practice-b1-2026 *,
+        #guided-practice-b1-2026 *::before,
+        #guided-practice-b1-2026 *::after {
+            box-sizing: border-box;
+        }
+
+        #guided-practice-b1-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 2.1rem;
+            font-weight: 800;
+        }
+
+        .gp-instruction {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.25rem;
+            line-height: 1.55;
+        }
+
+        .gp-section {
+            background: #fdfbff;
+            border: 2px solid #e9d5ff;
+            border-radius: 18px;
+            padding: 26px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(69, 24, 140, 0.03);
+        }
+
+        .gp-section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #45188c;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px dashed #e9d5ff;
+            padding-bottom: 12px;
+        }
+
+        .gp-dialogue {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .gp-line {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .gp-speaker {
+            font-weight: 800;
+            color: #6d28d9;
+        }
+
+        .gp-original-text {
+            color: #334155;
+        }
+
+        .gp-bracket-target {
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .gp-hint-badge {
+            font-size: 1.05rem;
+            color: #9333ea;
+            font-style: italic;
+            background: #faf5ff;
+            border-left: 3px solid #c084fc;
+            padding: 4px 12px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 2px;
+        }
+
+        .gp-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            background: #ffffff;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .gp-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .gp-input.is-correct {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+            color: #15803d !important;
+        }
+
+        .gp-input.is-wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+
+        .gp-inline-answer {
+            display: none;
+            font-size: 1.15rem;
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border-left: 4px solid #22c55e;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .gp-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .gp-ctrl-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .gp-btn-check {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .gp-btn-check:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+        }
+
+        .gp-btn-show {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .gp-btn-show:hover {
+            background: #e2e8f0;
+        }
+
+        .gp-btn-reset {
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+        }
+
+        .gp-btn-reset:hover {
+            background: #ffe4e6;
+        }
+
+        #gpScoreBox {
+            display: none;
+            margin-top: 30px;
+            padding: 24px;
+            border-radius: 18px;
+            background: #fdfbff;
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+            text-align: center;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #45188c;
+        }
+
+        @media (max-width: 650px) {
+            #guided-practice-b1-2026 { padding: 22px 14px; }
+            .gp-section { padding: 18px 14px; }
+            .gp-section-title { font-size: 1.25rem; }
+            .gp-line { font-size: 1.1rem; }
+            .gp-input { font-size: 1.05rem; }
+            .gp-ctrl-btn { width: 100%; text-align: center; }
+        }
+    </style>
+
+    <h2>🗣️ Práctica Guiada: Conversación & Reacciones Reales</h2>
+    <div class="gp-instruction">
+        Lee en voz alta las situaciones. Sustituye la frase entre corchetes <b>[...]</b> escribiendo la fórmula coloquial, la estructura pragmática o la corrección gramatical indicada.
+    </div>
+
+    <!-- ACTIVIDAD 1 -->
+    <div class="gp-section">
+        <div class="gp-section-title">☕ Actividad 1: La pesadilla matutina de Alberto</div>
+        <div class="gp-dialogue">
+            <!-- 1.1 -->
+            <div class="gp-line" data-targets='["soñé con", "soñe con", "he soñado con", "he sonado con"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Oye, no te imaginas mi noche. Anoche <span class="gp-bracket-target">[he tenido un sueño sobre]</span> un ataque masivo en la red de la empresa. ¡Me desperté sudando!</div>
+                <div class="gp-hint-badge">👉 Corrige el verbo y la preposición obligatoria (Indefinido: soñar + ...)</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>soñé con</b> (o <i>he soñado con</i>)</div>
+            </div>
+
+            <!-- 1.2 -->
+            <div class="gp-line" data-targets='["¡no me digas!", "no me digas", "¡no me digas", "¿en serio?", "en serio", "¡qué me dices!", "que me dices", "¡alucino!", "alucino"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> <span class="gp-bracket-target">[¡Qué sorpresa!]</span> (Reacción de sorpresa/shock en menos de 2 seg.)</div>
+                <div class="gp-hint-badge">👉 Sustituye por: ¡No me... / ¿En...? / ¡Qué me... / ¡Alucino!</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡No me digas!</b> / <b>¿En serio?</b> / <b>¡Qué me dices!</b> / <b>¡Alucino!</b></div>
+            </div>
+
+            <!-- 1.3 -->
+            <div class="gp-line" data-targets='["se me rompió la cafetera", "se me rompio la cafetera", "se me ha roto la cafetera"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Sí, y para colmo, когда voy a preparar el desayuno... <span class="gp-bracket-target">[yo he roto la cafetera]</span> y toda la encimera se llenó de café hirviendo.</div>
+                <div class="gp-hint-badge">👉 «Se accidental / Zen español»: a mí + se + me + romper en indefinido...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>se me rompió la cafetera</b> (o <i>se me ha roto</i>)</div>
+            </div>
+
+            <!-- 1.4 -->
+            <div class="gp-line" data-targets='["¡qué rabia!", "que rabia", "¡qué coraje!", "que coraje", "¡es el colmo!", "es el colmo"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> <span class="gp-bracket-target">[Estoy muy enfadada]</span> (Reacción de rabia/indignación)</div>
+                <div class="gp-hint-badge">👉 Sustituye por: ¡Qué r... / ¡Qué c... / ¡Es el c...!</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡Qué rabia!</b> / <b>¡Qué coraje!</b> / <b>¡Es el colmo!</b></div>
+            </div>
+
+            <!-- 1.5 -->
+            <div class="gp-line" data-targets='["tengo un cabreo con", "tengo un cabreo monumental con", "tengo un cabreo enorme con", "tengo un gran cabreo con", "estoy muy cabreado con", "estoy cabreado con"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Exacto, <span class="gp-bracket-target">[tengo mucho enfado con]</span> el universo.</div>
+                <div class="gp-hint-badge">👉 Sustitutivo coloquial de enfado (tengo un c... con / estoy cabreado con)</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>tengo un cabreo con</b> (o <i>estoy cabreado con</i>)</div>
+            </div>
+
+            <!-- 1.6 -->
+            <div class="gp-line" data-targets='["se burla de mí", "se burla de mi", "se cachondea de mí", "se cachondea de mi"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Y encima Alex, mi corgi, <span class="gp-bracket-target">[se ríe de mí]</span> mientras lame el suelo. ¡Es que no puedo más!</div>
+                <div class="gp-hint-badge">👉 Sinónimo coloquial reflexivo de reírse de alguien (burlarse de mí / cachondearse de mí)</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>se burla de mí</b> (o <i>se cachondea de mí</i>)</div>
+            </div>
+
+            <!-- 1.7 -->
+            <div class="gp-line" data-targets='["¿pero esto qué es?", "pero esto que es", "vaya tela", "¡vaya tela!", "es que ni de coña", "ni de coña"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> Cierre con conector + opinión perpleja ante la situación.</div>
+                <div class="gp-hint-badge">👉 Usa: ¿Pero esto qué es? / Vaya tela... / Es que ni de coña...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¿Pero esto qué es?</b> / <b>Vaya tela...</b> / <b>Es que ni de coña...</b></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD 2 -->
+    <div class="gp-section">
+        <div class="gp-section-title">🔧 Actividad 2: Negociando con Nacho, el casero inflexible</div>
+        <div class="gp-dialogue">
+            <!-- 2.1 -->
+            <div class="gp-line" data-targets='["¿le importaría venir a arreglar", "le importaria venir a arreglar", "¿sería posible que viniera a arreglar", "seria posible que viniera a arreglar", "¿podría venir a arreglar", "podria venir a arreglar", "quería comentarle si sería posible venir a arreglar"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Hola, Nacho. Mire... <span class="gp-bracket-target">[¡Venga a arreglar la placa y el desagüe ahora mismo!]</span></div>
+                <div class="gp-hint-badge">👉 Fórmula colchón de cortesía: ¿Le importaría venir a arreglar...? / ¿Sería posible...?</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¿Le importaría venir a arreglar...?</b> / <b>¿Sería posible que viniera a arreglar...?</b></div>
+            </div>
+
+            <!-- 2.2 -->
+            <div class="gp-line" data-targets='["me pillas fatal", "me pillas en un mal momento", "me pillas liadísimo", "me pillas liadisimo", "me temo que estoy muy liado", "me temo que es imposible", "me temo que estoy hasta arriba"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Nacho:</span> Uf, Alberto, hoy es imposible. <span class="gp-bracket-target">[No quiero ir porque tengo cosas que hacer]</span>.</div>
+                <div class="gp-hint-badge">👉 Excusa profesional / coloquial: Me pillas en/fatal... / Me temo que estoy muy...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>Me pillas fatal / en mal momento</b> / <b>Me temo que estoy muy liado</b></div>
+            </div>
+
+            <!-- 2.3 -->
+            <div class="gp-line" data-targets='["me sabe fatal", "me sabe muy mal", "¡qué corte!", "que corte", "me da mucho corte"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Alberto:</span> Pero Nacho, no sale agua caliente. <span class="gp-bracket-target">[Tengo mucha vergüenza]</span> de insistir tanto, pero es que tengo una reunión crucial.</div>
+                <div class="gp-hint-badge">👉 Expresa apuro y pudor cortés: Me sabe... / ¡Qué c...! / Me da mucho...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>Me sabe fatal</b> / <b>¡Qué corte!</b> / <b>Me da mucho corte</b></div>
+            </div>
+
+            <!-- 2.4 -->
+            <div class="gp-line" data-targets='["busquemos un punto intermedio", "¿qué le parece si", "que le parece si", "¿le parece bien si", "¿qué tal si"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Nacho:</span> Bueno, a ver... <span class="gp-bracket-target">[Hagamos un pacto]</span>: yo envío al fontanero a las siete de la tarde y usted le abre la puerta.</div>
+                <div class="gp-hint-badge">👉 Propón alternativa diplomática: Busquemos un punto... / ¿Qué le parece si...?</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>Busquemos un punto intermedio</b> / <b>¿Qué le parece si...?</b></div>
+            </div>
+
+            <!-- 2.5 -->
+            <div class="gp-line" data-targets='["¡menos mal!", "menos mal", "¡trato hecho!", "trato hecho", "me va perfecto", "me parece perfecto"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú / Alberto:</span> <span class="gp-bracket-target">[Es una buena noticia, estoy de acuerdo]</span></div>
+                <div class="gp-hint-badge">👉 Alivio y cierre de acuerdo: ¡Menos m...! / ¡Trato h...! / Me va p...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡Menos mal!</b> / <b>¡Trato hecho!</b> / <b>Me va perfecto</b></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD 3 -->
+    <div class="gp-section">
+        <div class="gp-section-title">💻 Actividad 3: «El marrón» del viernes a las 17:50</div>
+        <div class="gp-dialogue">
+            <!-- 3.1 -->
+            <div class="gp-line" data-targets='["depende de nosotros"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Compañera:</span> Oye, ¿has visto el mensaje del jefe en Slack? Dice que <span class="gp-bracket-target">[depende a nosotros]</span> revisar los logs de seguridad durante todo el sábado.</div>
+                <div class="gp-hint-badge">👉 Corrige la preposición fija del verbo: depender + ...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>depende de nosotros</b></div>
+            </div>
+
+            <!-- 3.2 -->
+            <div class="gp-line" data-targets='["¡qué faena!", "que faena", "menudo chasco", "¡menudo chasco!", "menudo bajón", "menudo bajon", "¡menudo bajón!"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> <span class="gp-bracket-target">[Qué triste estoy...]</span> (Reacción de bajón o decepción ante la faena)</div>
+                <div class="gp-hint-badge">👉 Sustituye por: ¡Qué f... / Menudo ch... / Menudo b...!</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡Qué faena!</b> / <b>Menudo chasco</b> / <b>Menudo bajón</b></div>
+            </div>
+
+            <!-- 3.3 -->
+            <div class="gp-line" data-targets='["¡ni de broma!", "ni de broma", "¡ni de coña!", "ni de coña", "¡qué grima!", "que grima", "es superior a mí", "es superior a mi"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> <span class="gp-bracket-target">[No me gusta nada esta idea]</span> (Rechazo tajante a trabajar el finde)</div>
+                <div class="gp-hint-badge">👉 Reacciona con fuerza: ¡Ni de b... / ¡Ni de c... / Es superior a...</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡Ni de broma!</b> / <b>¡Ni de coña!</b> / <b>Es superior a mí</b></div>
+            </div>
+
+            <!-- 3.4 -->
+            <div class="gp-line" data-targets='["¡qué pasada!", "que pasada", "¡de lujo!", "de lujo", "¡olé!", "ole", "¡menos mal!", "menos mal", "menos mal que era un simulacro", "¡qué bien!"]'>
+                <div class="gp-original-text"><span class="gp-speaker">Tú:</span> <span class="gp-bracket-target">[Qué bien, estoy contenta]</span> (Alivio y alegría al saber que era una falsa alarma)</div>
+                <div class="gp-hint-badge">👉 Explota de alegría: ¡Qué p... / ¡De l... / ¡Olé! / ¡Menos m...!</div>
+                <input type="text" class="gp-input" placeholder="Tu respuesta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>¡De lujo!</b> / <b>¡Qué pasada!</b> / <b>¡Olé!</b> / <b>¡Menos mal!</b></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RULETA DE SINÓNIMOS -->
+    <div class="gp-section">
+        <div class="gp-section-title">⚡ Reto Exprés: Ruleta de Sinónimos</div>
+        <div class="gp-dialogue">
+            <!-- R.1 -->
+            <div class="gp-line" data-targets='["chasco", "el chasco", "bajón", "el bajón", "bajon", "el bajon"]'>
+                <div class="gp-original-text">1. La decepción ➔ El <span class="gp-bracket-target">________</span> / El <span class="gp-bracket-target">________</span></div>
+                <div class="gp-hint-badge">👉 Escribe uno de los dos sustantivos coloquiales (chasco / bajón)</div>
+                <input type="text" class="gp-input" placeholder="Escribe chasco o bajón..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>chasco</b> o <b>bajón</b></div>
+            </div>
+
+            <!-- R.2 -->
+            <div class="gp-line" data-targets='["trágame", "tragame", "corte"]'>
+                <div class="gp-original-text">2. La vergüenza máxima ➔ ¡Tierra, <span class="gp-bracket-target">________</span>! / ¡Qué <span class="gp-bracket-target">________</span>!</div>
+                <div class="gp-hint-badge">👉 Completa: trágame / corte</div>
+                <input type="text" class="gp-input" placeholder="Escribe trágame o corte..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>trágame</b> o <b>corte</b></div>
+            </div>
+
+            <!-- R.3 -->
+            <div class="gp-line" data-targets='["cabreo", "el cabreo", "rabia", "la rabia"]'>
+                <div class="gp-original-text">3. El enfado grande ➔ El <span class="gp-bracket-target">________</span> / La <span class="gp-bracket-target">________</span></div>
+                <div class="gp-hint-badge">👉 Escribe: cabreo / rabia</div>
+                <input type="text" class="gp-input" placeholder="Escribe cabreo o rabia..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>cabreo</b> o <b>rabia</b></div>
+            </div>
+
+            <!-- R.4 -->
+            <div class="gp-line" data-targets='["menos", "menos mal"]'>
+                <div class="gp-original-text">4. Alivio ante un problema resuelto ➔ ¡<span class="gp-bracket-target">________</span> mal!</div>
+                <div class="gp-hint-badge">👉 Completa la palabra que falta</div>
+                <input type="text" class="gp-input" placeholder="Palabra que falta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>Menos</b> (¡Menos mal!)</div>
+            </div>
+
+            <!-- R.5 -->
+            <div class="gp-line" data-targets='["polvo", "muerta", "destrozada", "reventada"]'>
+                <div class="gp-original-text">5. Estar extremadamente agotada ➔ Estar hecha <span class="gp-bracket-target">________</span> / Estar <span class="gp-bracket-target">________</span></div>
+                <div class="gp-hint-badge">👉 Modismo coloquial: polvo / muerta / destrozada</div>
+                <input type="text" class="gp-input" placeholder="Escribe polvo o muerta..." autocomplete="off">
+                <div class="gp-inline-answer">💡 Clave: <b>polvo</b> o <b>muerta</b> (estar hecha polvo / estar muerta)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КНОПКИ УПРАВЛЕНИЯ -->
+    <div class="gp-control-bar">
+        <button type="button" class="gp-ctrl-btn gp-btn-check" onclick="checkGuidedPractice()">✅ Comprobar respuestas</button>
+        <button type="button" class="gp-ctrl-btn gp-btn-show" onclick="showGuidedPracticeKeys()">👁️ Ver todas las claves y explicaciones</button>
+        <button type="button" class="gp-ctrl-btn gp-btn-reset" onclick="resetGuidedPractice()">🔄 Reiniciar ejercicio</button>
+    </div>
+
+    <!-- БЛОК С РЕЗУЛЬТАТАМИ -->
+    <div id="gpScoreBox"></div>
+
+    <script>
+        function normalizeText(str) {
+            return (str || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¡!…«»"]/g, '')
+                .replace(/\s+/g, ' ');
+        }
+
+        function checkGuidedPractice() {
+            const lines = document.querySelectorAll('#guided-practice-b1-2026 .gp-line');
+            let correctCount = 0;
+            const totalLines = lines.length;
+
+            lines.forEach(line => {
+                const input = line.querySelector('.gp-input');
+                const rawUser = input.value;
+                const cleanUser = normalizeText(rawUser);
+
+                let targets = [];
+                try {
+                    targets = JSON.parse(line.getAttribute('data-targets') || '[]');
+                } catch(e) {
+                    targets = [];
+                }
+
+                const cleanTargets = targets.map(t => normalizeText(t));
+                const isMatch = cleanTargets.some(t => t === cleanUser || (cleanUser.length > 2 && t.includes(cleanUser)));
+
+                input.classList.remove('is-correct', 'is-wrong');
+
+                if (cleanUser && isMatch) {
+                    input.classList.add('is-correct');
+                    correctCount++;
+                } else if (cleanUser) {
+                    input.classList.add('is-wrong');
+                }
+
+                line.querySelector('.gp-inline-answer').style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('gpScoreBox');
+            const pct = Math.round((correctCount / totalLines) * 100);
+            scoreBox.innerHTML = `📊 Resultado: ${correctCount} de ${totalLines} aciertos (${pct}%). Revisa las claves verdes en cada línea para comparar tus respuestas.`;
+            scoreBox.style.display = 'block';
+            scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showGuidedPracticeKeys() {
+            const lines = document.querySelectorAll('#guided-practice-b1-2026 .gp-line');
+            lines.forEach(line => {
+                let targets = [];
+                try {
+                    targets = JSON.parse(line.getAttribute('data-targets') || '[]');
+                } catch(e) {
+                    targets = [];
+                }
+                const input = line.querySelector('.gp-input');
+                if (targets.length > 0) {
+                    input.value = targets[0];
+                    input.classList.remove('is-wrong');
+                    input.classList.add('is-correct');
+                }
+                line.querySelector('.gp-inline-answer').style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('gpScoreBox');
+            scoreBox.innerHTML = `🔑 Claves sugeridas insertadas. ¡Léelas en voz alta para practicar la entonación!`;
+            scoreBox.style.display = 'block';
+        }
+
+        function resetGuidedPractice() {
+            const lines = document.querySelectorAll('#guided-practice-b1-2026 .gp-line');
+            lines.forEach(line => {
+                const input = line.querySelector('.gp-input');
+                input.value = '';
+                input.className = 'gp-input';
+                line.querySelector('.gp-inline-answer').style.display = 'none';
+            });
+
+            const scoreBox = document.getElementById('gpScoreBox');
+            scoreBox.style.display = 'none';
+            scoreBox.innerHTML = '';
+        }
+    </script>
+</div>
