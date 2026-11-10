@@ -1,0 +1,526 @@
+<div class="ex-isolation" id="dialogos-preposiciones-b1-2026">
+    <style>
+        #dialogos-preposiciones-b1-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 980px;
+            margin: 25px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.08);
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        #dialogos-preposiciones-b1-2026 *,
+        #dialogos-preposiciones-b1-2026 *::before,
+        #dialogos-preposiciones-b1-2026 *::after {
+            box-sizing: border-box;
+        }
+
+        #dialogos-preposiciones-b1-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 2.1rem;
+            font-weight: 800;
+        }
+
+        .dg-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.25rem;
+            line-height: 1.55;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dg-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dg-card {
+            background: #fdfbff;
+            border: 2px solid #e9d5ff;
+            border-radius: 18px;
+            padding: 22px 24px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(69, 24, 140, 0.03);
+        }
+
+        .dg-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.09);
+        }
+
+        .dg-badge {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #6d28d9;
+            background: #ede9fe;
+            padding: 4px 12px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .dg-line {
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .dg-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .dg-speaker {
+            font-weight: 800;
+            color: #45188c;
+        }
+
+        .dg-verb-cue {
+            font-weight: 700;
+            color: #6d28d9;
+        }
+
+        .dg-input {
+            width: 84px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            background: #ffffff;
+            text-align: center;
+            outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 4px;
+        }
+
+        .dg-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+            background: #faf5ff;
+        }
+
+        .dg-input.is-correct {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+            color: #15803d !important;
+        }
+
+        .dg-input.is-wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #b91c1c !important;
+        }
+
+        .dg-feedback {
+            display: none;
+            font-size: 1.05rem;
+            color: #15803d;
+            background: #f0fdf4;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border-left: 4px solid #22c55e;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .dg-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .dg-ctrl-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .dg-btn-check {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .dg-btn-check:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+        }
+
+        .dg-btn-show {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .dg-btn-show:hover {
+            background: #e2e8f0;
+        }
+
+        .dg-btn-reset {
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+        }
+
+        .dg-btn-reset:hover {
+            background: #ffe4e6;
+        }
+
+        #dgScoreBox {
+            display: none;
+            margin-top: 30px;
+            padding: 24px;
+            border-radius: 18px;
+            background: #fdfbff;
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+            text-align: center;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #45188c;
+        }
+
+        @media (max-width: 650px) {
+            #dialogos-preposiciones-b1-2026 { padding: 22px 14px; }
+            #dialogos-preposiciones-b1-2026 h2 { font-size: 1.6rem; }
+            .dg-subtitle { font-size: 1.1rem; }
+            .dg-line { font-size: 1.1rem; line-height: 2; }
+            .dg-input { width: 72px; font-size: 1rem; }
+            .dg-ctrl-btn { width: 100%; text-align: center; }
+        }
+    </style>
+
+    <h2>💬 Mini-Diálogos: Régimen Preposicional en Acción</h2>
+    <div class="dg-subtitle">
+        Впишите подходящий предлог во все пропуски. Если глагол употребляется <b>без предлога</b> (прямое дополнение или инфинитив без связки), введите прочерк <b>-</b> или <b>sin</b>.
+    </div>
+
+    <div class="dg-grid" id="dgContainer">
+        <!-- Diálogo 1: Pensar, Soñar, Enamorarse -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 1 • Planes & Romance</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Elena:</span> ¿En qué estás <span class="dg-verb-cue">pensando</span>? Pareces distraído.
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Marcos:</span> Es que no dejo de <span class="dg-verb-cue">pensar</span> 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                el viaje a Andalucía. ¡Llevo meses <span class="dg-verb-cue">soñando</span> 
+                <input type="text" class="dg-input" data-ans='["con"]' data-hint="con" placeholder="..." autocomplete="off"> 
+                visitar la Alhambra!
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Elena:</span> Te entiendo, es imposible no <span class="dg-verb-cue">enamorarse</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                esa ciudad.
+            </div>
+            <div class="dg-feedback">Claves: <b>pensar en</b> • <b>soñar con</b> • <b>enamorarse de</b></div>
+        </div>
+
+        <!-- Diálogo 2: Depender, Casarse, Empezar a -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 2 • Decisiones personales</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Javier:</span> ¿Ya sabéis cuándo os vais a <span class="dg-verb-cue">casar</span>?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Lucía:</span> Aún no, <span class="dg-verb-cue">depende</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                los ahorros. Pablo quiere <span class="dg-verb-cue">casarse</span> 
+                <input type="text" class="dg-input" data-ans='["con"]' data-hint="con" placeholder="..." autocomplete="off"> 
+                boda grande, así que tenemos que <span class="dg-verb-cue">empezar</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                organizar el presupuesto ya.
+            </div>
+            <div class="dg-feedback">Claves: <b>depender de</b> • <b>casarse con</b> • <b>empezar a (+ inf.)</b></div>
+        </div>
+
+        <!-- Diálogo 3: Aprender a, Ayudar a, Acordarse de -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 3 • Nuevas habilidades</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Sonia:</span> ¿Estás <span class="dg-verb-cue">aprendiendo</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                conducir por fin?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">David:</span> Sí, mi hermano me está <span class="dg-verb-cue">ayudando</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                aparcar marcha atrás, aunque nunca me <span class="dg-verb-cue">acuerdo</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                ajustar el retrovisor derecho.
+            </div>
+            <div class="dg-feedback">Claves: <b>aprender a (+ inf.)</b> • <b>ayudar a (alguien) a (+ inf.)</b> • <b>acordarse de</b></div>
+        </div>
+
+        <!-- Diálogo 4: Quejarse de, Darse cuenta de, Enterarse de -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 4 • Noticias de oficina</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Raquel:</span> Todo el mundo se <span class="dg-verb-cue">queja</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                los horarios de este mes, ¿lo has visto?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Mateo:</span> Me acabo de <span class="dg-verb-cue">enterar</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                la noticia ahora mismo. Nos cambiaron los turnos sin <span class="dg-verb-cue">darnos cuenta</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                que afectaba al fin de semana.
+            </div>
+            <div class="dg-feedback">Claves: <b>quejarse de</b> • <b>enterarse de</b> • <b>darse cuenta de</b></div>
+        </div>
+
+        <!-- Diálogo 5: Encargarse de, Dejar de, Quedar en -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 5 • Trabajo en equipo</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Manuel:</span> ¿Quién se <span class="dg-verb-cue">encarga</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                revisar el informe final?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Clara:</span> Yo misma. <span class="dg-verb-cue">Quedamos</span> 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                entregarlo antes de las cinco, así que voy a <span class="dg-verb-cue">dejar</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                contestar correos para centrarme solo en esto.
+            </div>
+            <div class="dg-feedback">Claves: <b>encargarse de</b> • <b>quedar en (+ inf.)</b> • <b>dejar de (+ inf.)</b></div>
+        </div>
+
+        <!-- Diálogo 6: Negarse a, Renunciar a, Consistir en -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 6 • Negociación laboral</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Carlos:</span> Marcos se <span class="dg-verb-cue">niega</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                aceptar el nuevo puesto en la filial.
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Paula:</span> Es comprensible. Su oferta <span class="dg-verb-cue">consiste</span> 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                trasladarse sin aumento de sueldo, y él no quiere <span class="dg-verb-cue">renunciar</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                su jornada intensiva.
+            </div>
+            <div class="dg-feedback">Claves: <b>negarse a (+ inf.)</b> • <b>consistir en</b> • <b>renunciar a</b></div>
+        </div>
+
+        <!-- Diálogo 7: Tender a, Influir en, Confiar en -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 7 • Gestión y liderazgo</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Marta:</span> La jefa <span class="dg-verb-cue">tiende</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                controlar hasta el último detalle cuando se pone nerviosa.
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Guillermo:</span> Sí, y su actitud <span class="dg-verb-cue">influye</span> 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                todo el ambiente del departamento. Debería <span class="dg-verb-cue">confiar</span> más 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                nuestro criterio.
+            </div>
+            <div class="dg-feedback">Claves: <b>tender a (+ inf.)</b> • <b>influir en</b> • <b>confiar en</b></div>
+        </div>
+
+        <!-- Diálogo 8: Contribuir a, Apostar por, Dudar en -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 8 • Proyectos de futuro</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Inés:</span> La empresa ha decidido <span class="dg-verb-cue">apostar</span> 
+                <input type="text" class="dg-input" data-ans='["por"]' data-hint="por" placeholder="..." autocomplete="off"> 
+                el software libre este año.
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Sergio:</span> Me parece un acierto. Eso va a <span class="dg-verb-cue">contribuir</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                abaratar costes, así que no <span class="dg-verb-cue">dudaron</span> 
+                <input type="text" class="dg-input" data-ans='["en"]' data-hint="en" placeholder="..." autocomplete="off"> 
+                aprobarlo en la junta directiva.
+            </div>
+            <div class="dg-feedback">Claves: <b>apostar por</b> • <b>contribuir a</b> • <b>dudar en (+ inf.)</b></div>
+        </div>
+
+        <!-- Diálogo 9: Acostumbrarse a, Amenazar con, Intentar -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 9 • Conflictos y rutinas</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Nuria:</span> ¿Te has <span class="dg-verb-cue">acostumbrado</span> ya 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                los horarios de invierno?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Héctor:</span> Apenas. Encima el casero nos <span class="dg-verb-cue">amenaza</span> 
+                <input type="text" class="dg-input" data-ans='["con"]' data-hint="con" placeholder="..." autocomplete="off"> 
+                subir el alquiler. Voy a <span class="dg-verb-cue">intentar</span> 
+                <input type="text" class="dg-input" data-ans='["-", "sin", "sin preposicion", "sin preposición"]' data-hint="sin prep. (-)" placeholder="..." autocomplete="off"> 
+                hablar con él esta tarde con calma.
+            </div>
+            <div class="dg-feedback">Claves: <b>acostumbrarse a</b> • <b>amenazar con</b> • <b>intentar (- sin prep.)</b></div>
+        </div>
+
+        <!-- Diálogo 10: Matices de Tratar (tratar de, tratar sobre, tratar con) -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 10 • Los 3 usos de «Tratar»</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Beatriz:</span> ¿De qué va la conferencia de las once?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Fernando:</span> Va a <span class="dg-verb-cue">tratar</span> 
+                <input type="text" class="dg-input" data-ans='["sobre", "de", "sobre / de", "sobre/de"]' data-hint="sobre / de" placeholder="..." autocomplete="off"> 
+                ciberseguridad corporativa. Los ponentes van a <span class="dg-verb-cue">tratar</span> 
+                <input type="text" class="dg-input" data-ans='["de"]' data-hint="de" placeholder="..." autocomplete="off"> 
+                explicar cómo <span class="dg-verb-cue">tratar</span> 
+                <input type="text" class="dg-input" data-ans='["con"]' data-hint="con" placeholder="..." autocomplete="off"> 
+                proveedores externos sin poner en riesgo los servidores.
+            </div>
+            <div class="dg-feedback">Claves: <b>tratar sobre / de (tema)</b> • <b>tratar de (+ inf.: esforzarse)</b> • <b>tratar con (personas/entidades)</b></div>
+        </div>
+
+        <!-- Diálogo 11: Matices de Probar (probar comida/ropa vs. probar a) -->
+        <div class="dg-card">
+            <span class="dg-badge">Diálogo 11 • Los 2 usos de «Probar»</span>
+            <div class="dg-line">
+                <span class="dg-speaker">Laura:</span> La impresora sigue dando error de conexión, no imprime nada.
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Iván:</span> ¿Has <span class="dg-verb-cue">probado</span> 
+                <input type="text" class="dg-input" data-ans='["a"]' data-hint="a" placeholder="..." autocomplete="off"> 
+                reiniciar el router?
+            </div>
+            <div class="dg-line">
+                <span class="dg-speaker">Laura:</span> Todavía no. Primero voy a <span class="dg-verb-cue">probar</span> 
+                <input type="text" class="dg-input" data-ans='["-", "sin", "sin preposicion", "sin preposición"]' data-hint="sin prep. (-)" placeholder="..." autocomplete="off"> 
+                este cable nuevo que compré ayer.
+            </div>
+            <div class="dg-feedback">Claves: <b>probar a (+ inf.: ensayar sugerencia)</b> • <b>probar (- sin prep. + sustantivo: testear objeto/cosa)</b></div>
+        </div>
+    </div>
+
+    <!-- КНОПКИ -->
+    <div class="dg-control-bar">
+        <button type="button" class="dg-ctrl-btn dg-btn-check" onclick="checkDialogues()">✅ Comprobar mini-diálogos</button>
+        <button type="button" class="dg-ctrl-btn dg-btn-show" onclick="showDialogueKeys()">👁️ Ver todas las soluciones</button>
+        <button type="button" class="dg-ctrl-btn dg-btn-reset" onclick="resetDialogues()">🔄 Reiniciar</button>
+    </div>
+
+    <!-- БЛОК С РЕЗУЛЬТАТАМИ -->
+    <div id="dgScoreBox"></div>
+
+    <script>
+        function cleanVal(str) {
+            return (str || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¡!…«»"]/g, '')
+                .replace(/\s+/g, ' ');
+        }
+
+        function checkDialogues() {
+            const inputs = document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-input');
+            let correctCount = 0;
+            const total = inputs.length;
+
+            inputs.forEach(input => {
+                const userVal = cleanVal(input.value);
+                let valid = [];
+                try {
+                    valid = JSON.parse(input.getAttribute('data-ans') || '[]');
+                } catch (e) {
+                    valid = [];
+                }
+
+                const cleanTargets = valid.map(t => cleanVal(t));
+                const isMatch = cleanTargets.some(t => {
+                    if (t === '-' || t === 'sin' || t === 'sin preposicion') {
+                        return userVal === '-' || userVal === 'sin' || userVal === 'sin prep' || userVal === 'nada' || userVal === '';
+                    }
+                    return t === userVal;
+                });
+
+                input.classList.remove('is-correct', 'is-wrong');
+
+                if (isMatch && (userVal.length > 0 || cleanTargets.includes('-'))) {
+                    input.classList.add('is-correct');
+                    correctCount++;
+                } else {
+                    input.classList.add('is-wrong');
+                }
+            });
+
+            document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-feedback').forEach(fb => {
+                fb.style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('dgScoreBox');
+            const pct = Math.round((correctCount / total) * 100);
+            scoreBox.innerHTML = `📊 Resultado: <b>${correctCount}</b> de <b>${total}</b> preposiciones correctas (${pct}%).`;
+            scoreBox.style.display = 'block';
+            scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showDialogueKeys() {
+            const inputs = document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-input');
+            inputs.forEach(input => {
+                const hint = input.getAttribute('data-hint') || '';
+                input.value = hint.startsWith('sin prep') ? '-' : hint.split('/')[0].trim();
+                input.classList.remove('is-wrong');
+                input.classList.add('is-correct');
+            });
+
+            document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-feedback').forEach(fb => {
+                fb.style.display = 'block';
+            });
+
+            const scoreBox = document.getElementById('dgScoreBox');
+            scoreBox.innerHTML = `🔑 Todas las soluciones insertadas con éxito.`;
+            scoreBox.style.display = 'block';
+        }
+
+        function resetDialogues() {
+            const inputs = document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.className = 'dg-input';
+            });
+
+            document.querySelectorAll('#dialogos-preposiciones-b1-2026 .dg-feedback').forEach(fb => {
+                fb.style.display = 'none';
+            });
+
+            const scoreBox = document.getElementById('dgScoreBox');
+            scoreBox.style.display = 'none';
+            scoreBox.innerHTML = '';
+        }
+    </script>
+</div>
