@@ -1,0 +1,777 @@
+<div class="ex-isolation" id="regimen-verbal-b1-trainer-2026">
+    <style>
+        #regimen-verbal-b1-trainer-2026 {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            max-width: 1050px;
+            margin: 25px auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 2px solid #45188c;
+            box-shadow: 0 15px 35px rgba(69, 24, 140, 0.08);
+            color: #1e293b;
+            box-sizing: border-box;
+        }
+
+        #regimen-verbal-b1-trainer-2026 *,
+        #regimen-verbal-b1-trainer-2026 *::before,
+        #regimen-verbal-b1-trainer-2026 *::after {
+            box-sizing: border-box;
+        }
+
+        #regimen-verbal-b1-trainer-2026 h2 {
+            color: #45188c;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        .rv-instruction {
+            text-align: center;
+            color: #64748b;
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 860px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rv-table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            background: #ffffff;
+        }
+
+        .rv-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 760px;
+        }
+
+        .rv-table th {
+            background: #45188c;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 16px 20px;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .rv-table th:nth-child(1) { width: 24%; }
+        .rv-table th:nth-child(2) { width: 26%; }
+        .rv-table th:nth-child(3) { width: 50%; }
+
+        .rv-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        .rv-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rv-table tr:hover {
+            background-color: #fcfaff;
+        }
+
+        .rv-verb-cell {
+            font-weight: 800;
+            color: #45188c;
+            font-size: 1.3rem;
+        }
+
+        .rv-input-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rv-input {
+            width: 100%;
+            max-width: 170px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            background: #f8fafc;
+            outline: none;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .rv-input:focus {
+            border-color: #8b5cf6;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+
+        .rv-input.correct {
+            border-color: #22c55e !important;
+            background: #f0fdf4 !important;
+            color: #15803d !important;
+        }
+
+        .rv-input.wrong {
+            border-color: #ef4444 !important;
+            background: #fef2f2 !important;
+            color: #b91c1c !important;
+        }
+
+        .rv-expected {
+            display: none;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #15803d;
+            margin-top: 4px;
+        }
+
+        /* Hover Tooltip для сложных слов */
+        .rv-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 2px dotted #8b5cf6;
+            color: #45188c;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 4px;
+            transition: background 0.15s ease;
+        }
+
+        .rv-tooltip:hover, .rv-tooltip:active {
+            background: #f3e8ff;
+        }
+
+        .rv-tooltip .rv-tiptext {
+            visibility: hidden;
+            opacity: 0;
+            width: max-content;
+            max-width: 260px;
+            background-color: #1e1b4b;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 7px 12px;
+            position: absolute;
+            z-index: 100;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
+        }
+
+        .rv-tooltip .rv-tiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #1e1b4b transparent transparent transparent;
+        }
+
+        .rv-tooltip:hover .rv-tiptext,
+        .rv-tooltip:focus .rv-tiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Панель управления */
+        .rv-control-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .rv-ctrl-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .rv-btn-check {
+            background: #8b5cf6;
+            color: #ffffff;
+        }
+
+        .rv-btn-check:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+        }
+
+        .rv-btn-show {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+
+        .rv-btn-show:hover {
+            background: #e2e8f0;
+        }
+
+        .rv-btn-reset {
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+        }
+
+        .rv-btn-reset:hover {
+            background: #ffe4e6;
+        }
+
+        #rvScoreBox {
+            display: none;
+            margin-top: 30px;
+            padding: 24px;
+            border-radius: 18px;
+            background: #fdfbff;
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+            text-align: center;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #45188c;
+        }
+
+        @media (max-width: 650px) {
+            #regimen-verbal-b1-trainer-2026 { padding: 20px 14px; }
+            #regimen-verbal-b1-trainer-2026 h2 { font-size: 1.6rem; }
+            .rv-instruction { font-size: 1.1rem; }
+            .rv-ctrl-btn { width: 100%; text-align: center; }
+            .rv-table td, .rv-table th { padding: 12px 14px; font-size: 1rem; }
+            .rv-verb-cell { font-size: 1.15rem; }
+            .rv-input { max-width: 120px; font-size: 1rem; }
+        }
+    </style>
+
+    <h2>Guía Interactiva: Verbos, Preposiciones Fijas y Matices</h2>
+    <div class="rv-instruction">
+        Впишите нужный предлог (или комбинацию предлогов) во 2-й колонке. Если предлог не нужен, введите <b>sin</b> или прочерк <b>-</b>.<br>
+        <i>Слова с фиолетовым подчеркиванием в 3-й колонке содержат <b>перевод при наведении курсора</b> (или тапе).</i>
+    </div>
+
+    <div class="rv-table-wrapper">
+        <table class="rv-table">
+            <thead>
+                <tr>
+                    <th>Verbo</th>
+                    <th>Preposición / Régimen</th>
+                    <th>Significado y Matiz en español</th>
+                </tr>
+            </thead>
+            <tbody id="rvTableBody">
+                <!-- 1. Pensar -->
+                <tr data-answers='["en", "en / sobre / de", "en o sobre / de", "en, sobre, de"]' data-hint="en (o sobre / de)">
+                    <td class="rv-verb-cell">Pensar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <b>Pensar en:</b> tener a alguien o algo en la mente continuamente.<br>
+                        <b>Pensar de / sobre:</b> tener un <span class="rv-tooltip">juicio<span class="rv-tiptext">суждение / оценка</span></span>, <span class="rv-tooltip">criterio<span class="rv-tiptext">критерий / взгляд</span></span> u opinión acerca de un tema.
+                    </td>
+                </tr>
+
+                <!-- 2. Soñar -->
+                <tr data-answers='["con"]' data-hint="con">
+                    <td class="rv-verb-cell">Soñar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Representar imágenes en la mente mientras se duerme o desear algo con mucha <span class="rv-tooltip">ilusión<span class="rv-tiptext">воодушевление / надежда</span></span> e intensidad.
+                    </td>
+                </tr>
+
+                <!-- 3. Enamorarse -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Enamorarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Empezar a sentir amor o atracción romántica muy fuerte hacia una persona (o <span class="rv-tooltip">fascinación<span class="rv-tiptext">очарование / восторг</span></span> por una ciudad).
+                    </td>
+                </tr>
+
+                <!-- 4. Depender -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Depender</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Estar <span class="rv-tooltip">subordinado<span class="rv-tiptext">подчинённый / зависящий</span></span> a una condición, persona o circunstancia para poder suceder o funcionar.
+                    </td>
+                </tr>
+
+                <!-- 5. Casarse -->
+                <tr data-answers='["con"]' data-hint="con">
+                    <td class="rv-verb-cell">Casarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Contraer matrimonio<span class="rv-tiptext">вступить в брак</span></span> de manera legal o formal con otra persona.
+                    </td>
+                </tr>
+
+                <!-- 6. Empezar -->
+                <tr data-answers='["a", "a (+ inf.)", "a + inf"]' data-hint="a (+ inf.)">
+                    <td class="rv-verb-cell">Empezar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Iniciar una acción o proceso determinado en el tiempo.
+                    </td>
+                </tr>
+
+                <!-- 7. Aprender -->
+                <tr data-answers='["a", "a (+ inf.)", "a + inf"]' data-hint="a (+ inf.)">
+                    <td class="rv-verb-cell">Aprender</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Adquirir el conocimiento, la habilidad o la <span class="rv-tooltip">destreza<span class="rv-tiptext">сноровка / ловкость / навык</span></span> necesaria para realizar una actividad.
+                    </td>
+                </tr>
+
+                <!-- 8. Ayudar -->
+                <tr data-answers='["a", "a (+ inf.)", "a (alguien) a"]' data-hint="a (alguien) a (+ inf.)">
+                    <td class="rv-verb-cell">Ayudar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Prestar apoyo, colaboración o asistencia a otra persona para que <span class="rv-tooltip">logre<span class="rv-tiptext">сумел / смог достичь (от lograr)</span></span> hacer algo.
+                    </td>
+                </tr>
+
+                <!-- 9. Acordarse -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Acordarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Traer a la memoria activa un recuerdo o dato pasado (sinónimo con <i>de</i>: <i>acordarse de</i>; sin <i>de</i>: <i>recordar</i>).
+                    </td>
+                </tr>
+
+                <!-- 10. Quejarse -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Quejarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Manifestar descontento, dolor, enfado o <span class="rv-tooltip">disgusto<span class="rv-tiptext">неудовольствие / огорчение</span></span> por una situación molesta o injusta.
+                    </td>
+                </tr>
+
+                <!-- 11. Darse cuenta -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Darse cuenta</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Percibir<span class="rv-tiptext">уловить / заметить</span></span>, notar o comprender <span class="rv-tooltip">de repente<span class="rv-tiptext">внезапно / вдруг</span></span> algo que antes se <span class="rv-tooltip">ignoraba<span class="rv-tiptext">не знали / не замечали</span></span>.
+                    </td>
+                </tr>
+
+                <!-- 12. Enterarse -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Enterarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Recibir una noticia o información que no se conocía <span class="rv-tooltip">previamente<span class="rv-tiptext">ранее / предварительно</span></span>.
+                    </td>
+                </tr>
+
+                <!-- 13. Encargarse -->
+                <tr data-answers='["de"]' data-hint="de">
+                    <td class="rv-verb-cell">Encargarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Asumir<span class="rv-tiptext">взять на себя</span></span> la responsabilidad, gestión o cuidado de una tarea o persona.
+                    </td>
+                </tr>
+
+                <!-- 14. Dejar -->
+                <tr data-answers='["de", "de (+ inf.)", "de + inf"]' data-hint="de (+ inf.)">
+                    <td class="rv-verb-cell">Dejar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Parar o interrumpir definitivamente o de forma temporal un hábito o actividad.
+                    </td>
+                </tr>
+
+                <!-- 15. Quedar -->
+                <tr data-answers='["en", "en (+ inf. / sust.)", "en + inf"]' data-hint="en (+ inf. / sust.)">
+                    <td class="rv-verb-cell">Quedar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Llegar a un acuerdo o <span class="rv-tooltip">compromiso mutuo<span class="rv-tiptext">взаимная договорённость / обязательство</span></span> sobre una fecha, hora o decisión común.
+                    </td>
+                </tr>
+
+                <!-- 16. Negarse -->
+                <tr data-answers='["a", "a (+ inf.)", "a + inf"]' data-hint="a (+ inf.)">
+                    <td class="rv-verb-cell">Negarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Rechazar <span class="rv-tooltip">rotundamente<span class="rv-tiptext">категорически / наотрез</span></span> hacer algo que se pide o se exige.
+                    </td>
+                </tr>
+
+                <!-- 17. Renunciar -->
+                <tr data-answers='["a"]' data-hint="a">
+                    <td class="rv-verb-cell">Renunciar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Dejar voluntariamente un derecho, un puesto de trabajo o un beneficio.
+                    </td>
+                </tr>
+
+                <!-- 18. Consistir -->
+                <tr data-answers='["en"]' data-hint="en">
+                    <td class="rv-verb-cell">Consistir</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Estar compuesto por ciertas partes o tener como base y fundamento una definición concreta.
+                    </td>
+                </tr>
+
+                <!-- 19. Tender -->
+                <tr data-answers='["a", "a (+ inf. / sust.)", "a + inf"]' data-hint="a (+ inf. / sust.)">
+                    <td class="rv-verb-cell">Tender</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Tener <span class="rv-tooltip">propensión<span class="rv-tiptext">склонность / тяга</span></span>, inclinación o costumbre habitual hacia una conducta o resultado.
+                    </td>
+                </tr>
+
+                <!-- 20. Influir -->
+                <tr data-answers='["en"]' data-hint="en">
+                    <td class="rv-verb-cell">Influir</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Ejercer<span class="rv-tiptext">оказывать / производить</span></span> un efecto o producir cambios notables en el estado o decisión de otra cosa.
+                    </td>
+                </tr>
+
+                <!-- 21. Confiar -->
+                <tr data-answers='["en"]' data-hint="en">
+                    <td class="rv-verb-cell">Confiar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Tener seguridad, fe y esperanza en la capacidad u honestidad de alguien o algo.
+                    </td>
+                </tr>
+
+                <!-- 22. Contribuir -->
+                <tr data-answers='["a"]' data-hint="a">
+                    <td class="rv-verb-cell">Contribuir</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Aportar<span class="rv-tiptext">вносить вклад / предоставлять</span></span> ayuda, recursos o esfuerzo para conseguir un fin colectivo.
+                    </td>
+                </tr>
+
+                <!-- 23. Apostar -->
+                <tr data-answers='["por"]' data-hint="por">
+                    <td class="rv-verb-cell">Apostar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Respaldar<span class="rv-tiptext">поддерживать / делать ставку на</span></span> con convicción una idea, proyecto o persona esperando su éxito futuro.
+                    </td>
+                </tr>
+
+                <!-- 24. Dudar -->
+                <tr data-answers='["en", "en (+ inf.)", "en + inf"]' data-hint="en (+ inf.)">
+                    <td class="rv-verb-cell">Dudar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Vacilar<span class="rv-tiptext">колебаться / сомневаться</span></span> o tardar tiempo en tomar una decisión antes de ejecutarla.
+                    </td>
+                </tr>
+
+                <!-- 25. Acostumbrarse -->
+                <tr data-answers='["a"]' data-hint="a">
+                    <td class="rv-verb-cell">Acostumbrarse</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Adaptarse a una nueva rutina, clima, ritmo de vida o circunstancia.
+                    </td>
+                </tr>
+
+                <!-- 26. Amenazar -->
+                <tr data-answers='["con"]' data-hint="con">
+                    <td class="rv-verb-cell">Amenazar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Advertir<span class="rv-tiptext">предупреждать (с угрозой)</span></span> con intención de causar un daño o castigo si no se cumple una condición.
+                    </td>
+                </tr>
+
+                <!-- 27. Intentar -->
+                <tr data-answers='["sin", "sin preposicion", "sin preposición", "-", "ninguna", "nada"]' data-hint="sin preposición (+ inf.)">
+                    <td class="rv-verb-cell">Intentar</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="sin preposición / -" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Hacer un esfuerzo voluntario y directo para lograr un objetivo concreto sin interponer enlaces gramaticales.
+                    </td>
+                </tr>
+
+                <!-- 28. Tratar de -->
+                <tr data-answers='["de", "de (+ inf.)", "de + inf"]' data-hint="de (+ inf.)">
+                    <td class="rv-verb-cell">Tratar (esfuerzo)</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Esforzarse y <span class="rv-tooltip">poner empeño<span class="rv-tiptext">прилагать осознанные усилия</span></span> en conseguir algo (equivalente directo a <i>intentar</i>).
+                    </td>
+                </tr>
+
+                <!-- 29. Tratar sobre / de -->
+                <tr data-answers='["sobre / de", "sobre o de", "sobre", "de", "sobre/de"]' data-hint="sobre / de (+ sust.)">
+                    <td class="rv-verb-cell">Tratar (asunto)</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="sobre / de" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Referirse a una temática particular; ser el asunto central de una obra, texto o reunión.
+                    </td>
+                </tr>
+
+                <!-- 30. Tratar con -->
+                <tr data-answers='["con", "con (+ persona / entidad)"]' data-hint="con (+ persona / entidad)">
+                    <td class="rv-verb-cell">Tratar (contacto)</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Mantener contacto profesional, gestionar o comunicarse habitualmente con alguien.
+                    </td>
+                </tr>
+
+                <!-- 31. Probar (cosa) -->
+                <tr data-answers='["sin", "sin preposicion", "sin preposición", "-", "ninguna", "nada"]' data-hint="sin preposición (+ sust.)">
+                    <td class="rv-verb-cell">Probar (cosa)</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="sin preposición / -" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        <span class="rv-tooltip">Degustar<span class="rv-tiptext">дегустировать / пробовать на вкус</span></span> comida o bebida, ponerse ropa para ver si queda bien, o testear maquinaria/código.
+                    </td>
+                </tr>
+
+                <!-- 32. Probar a -->
+                <tr data-answers='["a", "a (+ inf.)", "a + inf"]' data-hint="a (+ inf.)">
+                    <td class="rv-verb-cell">Probar (ensayo)</td>
+                    <td>
+                        <input type="text" class="rv-input" placeholder="¿Preposición?" autocomplete="off">
+                        <div class="rv-expected"></div>
+                    </td>
+                    <td>
+                        Experimentar una acción novedosa a modo de sugerencia o <span class="rv-tooltip">ensayo<span class="rv-tiptext">проба / попытка / эксперимент</span></span> para comprobar si funciona.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Кнопки управления -->
+    <div class="rv-control-bar">
+        <button type="button" class="rv-ctrl-btn rv-btn-check" onclick="checkRegimenVerbal()">✅ Comprobar</button>
+        <button type="button" class="rv-ctrl-btn rv-btn-show" onclick="showRegimenVerbal()">👁️ Mostrar soluciones</button>
+        <button type="button" class="rv-ctrl-btn rv-btn-reset" onclick="resetRegimenVerbal()">🔄 Reiniciar</button>
+    </div>
+
+    <!-- Блок баллов -->
+    <div id="rvScoreBox"></div>
+
+    <script>
+        function normalizeRV(str) {
+            return (str || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¡!…«»"]/g, '')
+                .replace(/\s+/g, ' ');
+        }
+
+        function checkRegimenVerbal() {
+            const rows = document.querySelectorAll('#rvTableBody tr');
+            let correctCount = 0;
+            const total = rows.length;
+
+            rows.forEach(row => {
+                const input = row.querySelector('.rv-input');
+                const expBox = row.querySelector('.rv-expected');
+                const userVal = normalizeRV(input.value);
+
+                let validAnswers = [];
+                try {
+                    validAnswers = JSON.parse(row.getAttribute('data-answers') || '[]');
+                } catch(e) {
+                    validAnswers = [];
+                }
+
+                const cleanAnswers = validAnswers.map(a => normalizeRV(a));
+                const isCorrect = cleanAnswers.some(ans => ans === userVal || (userVal.length > 0 && ans.split(' ').includes(userVal)));
+
+                input.classList.remove('correct', 'wrong');
+
+                if (userVal.length > 0 && isCorrect) {
+                    input.classList.add('correct');
+                    correctCount++;
+                    expBox.style.display = 'none';
+                } else {
+                    input.classList.add('wrong');
+                    expBox.innerText = '👉 ' + row.getAttribute('data-hint');
+                    expBox.style.display = 'block';
+                }
+            });
+
+            const scoreBox = document.getElementById('rvScoreBox');
+            const pct = Math.round((correctCount / total) * 100);
+            scoreBox.innerHTML = `📊 Puntuación: <b>${correctCount}</b> de <b>${total}</b> correctas (${pct}%).`;
+            scoreBox.style.display = 'block';
+            scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showRegimenVerbal() {
+            const rows = document.querySelectorAll('#rvTableBody tr');
+            rows.forEach(row => {
+                const input = row.querySelector('.rv-input');
+                const expBox = row.querySelector('.rv-expected');
+                const hint = row.getAttribute('data-hint');
+
+                input.value = hint;
+                input.classList.remove('wrong');
+                input.classList.add('correct');
+                expBox.style.display = 'none';
+            });
+
+            const scoreBox = document.getElementById('rvScoreBox');
+            scoreBox.innerHTML = `🔑 Todas las soluciones han sido insertadas. ¡Pasa el ratón por los términos subrayados para ver las definiciones!`;
+            scoreBox.style.display = 'block';
+        }
+
+        function resetRegimenVerbal() {
+            const rows = document.querySelectorAll('#rvTableBody tr');
+            rows.forEach(row => {
+                const input = row.querySelector('.rv-input');
+                const expBox = row.querySelector('.rv-expected');
+
+                input.value = '';
+                input.className = 'rv-input';
+                expBox.style.display = 'none';
+                expBox.innerText = '';
+            });
+
+            const scoreBox = document.getElementById('rvScoreBox');
+            scoreBox.style.display = 'none';
+            scoreBox.innerHTML = '';
+        }
+    </script>
+</div>
